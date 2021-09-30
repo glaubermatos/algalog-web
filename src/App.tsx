@@ -1,5 +1,13 @@
+import { Content } from "./components/Content";
+import { SideBar } from "./components/SideBar";
+import { GlobalStyle } from "./styles/global";
+
 export function App() {
   return (
-    <h1>Hello algalog-web</h1>
+    <>
+      <GlobalStyle />
+      <SideBar />
+      <Content />
+    </>
   );
 }
