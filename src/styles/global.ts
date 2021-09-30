@@ -9,6 +9,8 @@ export const GlobalStyle = createGlobalStyle`
         --background-color: #ffffff;
 
         --primary-color-light: hsla(var(--hue), 39%, 54%, 1);
+
+        --sidebar-width: 5.625rem;
     }
 
     * {

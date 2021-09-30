@@ -6,7 +6,7 @@ interface MenuItemProps {
 
 export const Menu = styled.aside`
     background: var(--primary-color-light);
-    width: 5.625rem;
+    width: var(--sidebar-width);
     position: fixed;
     left: 0;
     top: 0;

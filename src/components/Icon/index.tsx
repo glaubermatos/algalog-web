@@ -1,4 +1,4 @@
-import { IconSvg } from '../styles/components/icon'
+import { IconSvg } from './styles'
 
 interface IconProps {
     name: string;

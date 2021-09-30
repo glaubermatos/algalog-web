@@ -1,4 +1,5 @@
 import { Content } from "./components/Content";
+import { MainContainer } from "./components/MainContainer";
 import { SideBar } from "./components/SideBar";
 import { GlobalStyle } from "./styles/global";
 
@@ -7,7 +8,9 @@ export function App() {
     <>
       <GlobalStyle />
       <SideBar />
-      <Content />
+      <MainContainer>
+        <Content />
+      </MainContainer>
     </>
   );
 }

@@ -1,5 +1,5 @@
-import { Icon } from './Icon'
-import { Menu, MenuItem } from "../styles/components/sidebar";
+import { Icon } from '../Icon'
+import { Menu, MenuItem } from "./styles";
 
 export function SideBar() {
     return(
