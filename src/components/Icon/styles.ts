@@ -5,6 +5,8 @@ interface IconSvgProps {
 }
 
 export const IconSvg = styled.svg<IconSvgProps>`
+    /* width: 64px;
+    height: 64px; */
 
     & path {
         stroke: ${(props) => {
@@ -13,7 +15,7 @@ export const IconSvg = styled.svg<IconSvgProps>`
                     return 'var(--gray-600)';
 
                 case 'primary-light':
-                    return 'var(--primary-light-color)';
+                    return 'var(--primary-color-light)';
             
                 default:
                     return 'var(--background-color)';
