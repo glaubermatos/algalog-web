@@ -1,9 +1,14 @@
+import { ReactNode } from "react";
 import { Container } from "./styles";
 
-export function Content() {
+interface ContentProps {
+    children: ReactNode
+}
+
+export function Content(props: ContentProps) {
     return(
         <Container>
-            Content
+            {props.children}
         </Container>
     );
 }

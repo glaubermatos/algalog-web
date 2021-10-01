@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
     :root {
@@ -11,6 +12,11 @@ export const GlobalStyle = createGlobalStyle`
         --primary-color-light: hsla(var(--hue), 39%, 54%, 1);
 
         --sidebar-width: 5.625rem;
+
+        
+        --gray-600: hsla(var(--hue), 80%, 0%, 0.6);
+        --gray-400: hsla(var(--hue), 80%, 0%, 0.4);
+        --gray-200: hsla(var(--hue), 80%, 0%, 0.2);
     }
 
     * {
@@ -29,7 +35,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background: var(---body-color);
+        background: var(--body-color);
         -webkit-font-smoothing: antialiased;
     }
 
@@ -46,4 +52,10 @@ export const GlobalStyle = createGlobalStyle`
         opacity: 0.6;
         cursor: not-allowed;
     }
+`
+
+export const Title = styled.h1`
+    font: 400 2rem 'Nunito', sans-serif;
+    line-height: 2.5rem;
+    color: var(--gray-600);
 `

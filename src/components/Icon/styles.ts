@@ -1,7 +1,25 @@
 import styled from 'styled-components'
 
-export const IconSvg = styled.svg`
+interface IconSvgProps {
+    color?: 'primary-light' | 'gray';
+}
+
+export const IconSvg = styled.svg<IconSvgProps>`
+
     & path {
-        stroke: var(--background-color);
+        stroke: ${(props) => {
+            switch (props.color) {
+                case 'gray':
+                    return 'var(--gray-600)';
+
+                case 'primary-light':
+                    return 'var(--primary-light-color)';
+            
+                default:
+                    return 'var(--background-color)';
+            }
+        }};
+
+        
     }
 `
