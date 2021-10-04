@@ -1,3 +1,5 @@
+import { BrowserRouter, Switch, Route} from 'react-router-dom'
+
 import { Content } from "./components/Content";
 import { MainContainer } from "./components/MainContainer";
 import { SideBar } from "./components/SideBar";
@@ -11,13 +13,17 @@ export function App() {
   return (
     <>
       <GlobalStyle />
-      <SideBar />
-      <MainContainer>
-        <Content>
-          <Clientes></Clientes>
-          {/* <Dashboard /> */}
-        </Content>
-      </MainContainer>
+      <BrowserRouter>
+        <SideBar />
+        <MainContainer>
+          <Content>
+              <Switch>
+                <Route path="/" exact component={Dashboard} />
+                <Route path="/customers" exact component={Clientes} />
+              </Switch>
+          </Content>
+        </MainContainer>
+      </BrowserRouter>
     </>
   );
 }

@@ -34,15 +34,19 @@ export const MenuItem = styled.li<MenuItemProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0.6;
     position: relative;
 
-    ${props => props.active && css`
-        opacity: 1;
-    `}
+    a {
+        opacity: 0.6;
+        display: inline-block;
+        height: 100%;
+        width: 100%;
 
-    &::before {
-        ${props => props.active && css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover::before {
             content: "";
             position: absolute;
             top: 0;
@@ -51,27 +55,21 @@ export const MenuItem = styled.li<MenuItemProps>`
             height: 100%;
             background: var(--background-color);
             border-radius: 0 0.3125rem 0.3125rem 0;
-        `}
-    } 
-    
-    &:hover::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0.25rem;
-        height: 100%;
-        background: var(--background-color);
-        border-radius: 0 0.3125rem 0.3125rem 0;
-    }
+        }
 
-    a {
-        display: inline-block;
-        height: 100%;
-        width: 100%;
+        &.active {
+            opacity: 1;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0.25rem;
+                height: 100%;
+                background: var(--background-color);
+                border-radius: 0 0.3125rem 0.3125rem 0;
+            } 
+        }
+    }     
 `

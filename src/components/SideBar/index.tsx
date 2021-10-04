@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom'
+
 import { Icon } from '../Icon'
+import { NavLink } from '../NavLink';
 import { Menu, MenuItem } from "./styles";
 
 export function SideBar() {
@@ -6,20 +9,20 @@ export function SideBar() {
         <Menu>
             <nav>
                 <ul>
-                    <MenuItem active>
-                        <a href="#">
+                    <MenuItem>
+                        <NavLink to="/" activeOnlyWhenExact={true}>
                             <Icon size={36} name="home" />
-                        </a>
+                        </NavLink>
                     </MenuItem>
                     <MenuItem>
-                        <a href="#">
+                        <NavLink to="/deliveries">
                             <Icon size={36} name="entregas" />
-                        </a>
+                        </NavLink>
                     </MenuItem>
                     <MenuItem>
-                        <a href="#">
+                        <NavLink to="/customers">
                             <Icon size={36} name="clientes" />
-                        </a>
+                        </NavLink>
                     </MenuItem>
                 </ul>
             </nav>
