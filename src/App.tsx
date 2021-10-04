@@ -4,6 +4,8 @@ import { SideBar } from "./components/SideBar";
 import { GlobalStyle } from "./styles/global";
 
 import { Dashboard } from "./pages/Dashboard";
+import { Clientes } from "./pages/Clientes";
+
 
 export function App() {
   return (
@@ -12,7 +14,8 @@ export function App() {
       <SideBar />
       <MainContainer>
         <Content>
-          <Dashboard />
+          <Clientes></Clientes>
+          {/* <Dashboard /> */}
         </Content>
       </MainContainer>
     </>

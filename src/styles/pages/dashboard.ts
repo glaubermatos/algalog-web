@@ -14,6 +14,7 @@ export const Content = styled(PageContent)`
         padding: 2rem 2rem 2rem 1.5rem;
         border: 1px solid transparent;
         box-shadow: 0px 4px 20px var(--box-shadow-color);
+        transition: 0.2s;
 
         &:hover {
             border: 1px solid var(--primary-color-light);
@@ -22,6 +23,7 @@ export const Content = styled(PageContent)`
                 var(--primary-color-light) -220%,
                 rgba(255, 255, 255, 1) 45%
             );
+            transform: translateY(-0.5rem);
         }
 
         a {

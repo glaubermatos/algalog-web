@@ -8,14 +8,12 @@ export const GlobalStyle = createGlobalStyle`
         
         --body-color: hsla(var(--hue), 9%, 95%, 1);
         --background-color: #ffffff;
-
         
         --primary-color: hsla(var(--hue), 44%, 44%, 1);
         --primary-color-light: hsla(var(--hue), 39%, 54%, 1);
         --primary-color-extra-light: hsla(var(--hue), 33%, 96%, 1);
 
         --sidebar-width: 5.625rem;
-
         
         --gray-600: hsla(var(--hue), 80%, 0%, 0.6);
         --gray-500: hsla(var(--hue), 80%, 0%, 0.5);

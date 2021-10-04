@@ -7,7 +7,7 @@ import { Icon } from '../components/Icon';
 export function Dashboard() {
   return (
     <Container>
-        <Header helpText="Início"/>
+        <Header iconName="home" title="Dashboard" helpText="Início"/>
         <Content>
           <div className="card">
             <a href="#">

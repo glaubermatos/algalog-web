@@ -4,18 +4,20 @@ import { Title } from "../../styles/global";
 import { ReactNode } from "react";
 
 interface HeaderProps {
+    iconName: 'home' | 'entregas' | 'clientes';
+    title: string;
     helpText: string;
     children?: ReactNode;
 }
 
-export function Header({helpText, children}: HeaderProps) {
+export function Header({iconName, title, helpText, children}: HeaderProps) {
     return(
         <Container>
             <div className="info-container">
-                <Icon size={36} name="home" color="gray" />
+                <Icon size={36} name={ iconName } color="gray" />
                 <div className="box-title">
-                    <Title>Dashboard</Title>
-                    <span>{helpText}</span>
+                    <Title>{ title }</Title>
+                    <span>{ helpText }</span>
                 </div>
             </div>
             <div className="actions">
