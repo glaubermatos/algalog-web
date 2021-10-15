@@ -1,8 +1,12 @@
+import { useHistory } from 'react-router-dom'
+
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/clientes";
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 
 export function Clientes() {
+    const history = useHistory()
+
     return(
         <Container>
             <Header 
@@ -10,7 +14,7 @@ export function Clientes() {
                 title="Clientes" 
                 helpText="2 clientes cadastrados"
             >
-                <button>
+                <button onClick={() => history.push('/customers/new')}>
                     Novo cliente
                 </button>
             </Header>

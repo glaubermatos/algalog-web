@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 import { Icon } from '../Icon'
 import { NavLink } from '../NavLink';
 import { Menu, MenuItem } from "./styles";

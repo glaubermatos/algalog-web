@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { Header } from '../components/Header';
 import { Container, Content } from '../styles/pages/dashboard'
 
@@ -10,7 +12,7 @@ export function Dashboard() {
         <Header iconName="home" title="Dashboard" helpText="Início"/>
         <Content>
           <div className="card">
-            <a href="#">
+            <Link to="/deliveries">
               <div className="img-mask">
                 <Icon name="entregas" size={64} color="primary-light" />
               </div>
@@ -19,10 +21,10 @@ export function Dashboard() {
                 <strong>239</strong>
               </div>
               <img src={arrowRightImg} alt="arrow-right" />
-            </a>
+            </Link>
           </div>
           <div className="card">
-            <a href="#">
+            <Link to="/customers">
               <div className="img-mask">
                 <Icon name="clientes" size={64} color="primary-light" />
               </div>
@@ -31,7 +33,7 @@ export function Dashboard() {
                 <strong>128</strong>
               </div>
               <img src={arrowRightImg} alt="arrow-right" />
-            </a>
+            </Link>
           </div>
         </Content>
     </Container>

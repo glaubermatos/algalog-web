@@ -43,5 +43,29 @@ export const Container = styled.header`
                 filter: brightness(0.9);
             }
         }
+
+        a {
+            font: 500 0.75rem 'Inter', sans-serif;
+            line-height: 1.09375rem;
+            color: var(--gray-800);
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 0.07875rem;
+            height: 2rem;
+
+            display: flex;
+            align-items: center;
+
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            svg, img {
+                opacity: 0.8;
+                margin-right: 1rem;
+            }
+        }
     }
 `

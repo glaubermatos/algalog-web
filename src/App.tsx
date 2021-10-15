@@ -7,6 +7,9 @@ import { GlobalStyle } from "./styles/global";
 
 import { Dashboard } from "./pages/Dashboard";
 import { Clientes } from "./pages/Clientes";
+import { CadastroCliente } from './pages/CadastroCliente';
+import { Entregas } from './pages/Entregas';
+import { NovaEntrega } from './pages/NovaEntrega';
 
 
 export function App() {
@@ -19,7 +22,10 @@ export function App() {
           <Content>
               <Switch>
                 <Route path="/" exact component={Dashboard} />
+                <Route path="/deliveries" exact component={Entregas} />
+                <Route path="/deliveries/new" component={NovaEntrega} />
                 <Route path="/customers" exact component={Clientes} />
+                <Route path="/customers/new" component={CadastroCliente} />
               </Switch>
           </Content>
         </MainContainer>
