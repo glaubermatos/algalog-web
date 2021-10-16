@@ -25,24 +25,6 @@ export const Container = styled.header`
     }
 
     .actions {
-        button {
-            height: 3rem;
-            border: 0;
-            padding: 0 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.07875rem; /*1.26px = 9%*/
-            font: 600 0.9375rem "Inter", sans-serif; /*14px*/
-            border-radius: 0.5rem;
-            
-            background: var(--primary-color-light);
-            color: var(--background-color);
-
-            transition: filter 0.2s;
-
-            &:hover {
-                filter: brightness(0.9);
-            }
-        }
 
         a {
             font: 500 0.75rem 'Inter', sans-serif;

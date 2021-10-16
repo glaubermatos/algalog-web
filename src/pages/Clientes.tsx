@@ -14,7 +14,7 @@ export function Clientes() {
                 title="Clientes" 
                 helpText="2 clientes cadastrados"
             >
-                <button onClick={() => history.push('/customers/new')}>
+                <button className="button primary-light" onClick={() => history.push('/customers/new')}>
                     Novo cliente
                 </button>
             </Header>
