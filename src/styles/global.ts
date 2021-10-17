@@ -115,6 +115,87 @@ export const GlobalStyle = createGlobalStyle`
             color: var(--primary-color-light);
         }
     }
+    
+    form {
+        display: inline-block;
+        width: 100%;
+
+        h2 {
+            text-transform: uppercase;
+            font: 400 1rem "Inter", sans-serif;
+            color: var(--gray-600);
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+
+            & + .form-group {
+                margin-top: 1.5rem;
+            }
+
+            label {
+                color: var(--gray-500);
+                margin-bottom: 0.5rem;
+            }
+
+            .input-group {
+                display: flex;
+                justify-content: flex-start;
+
+                .input-group-addon {
+                    border-radius: 0.5rem 0 0 0.5rem;
+                    background: var(--background-color);
+                    border: 1.5px solid var(--input-border-color);
+                    color: var(--gray-600);
+                    padding: 0 1rem;
+
+                    display: flex;
+                    align-items: center;
+
+                    svg {
+                        opacity: 0.6;
+                    }
+                }
+
+                input {
+                    flex: 1;
+                    border-radius: 0 0.5rem 0.5rem 0;
+                    border-left: 1.5px solid transparent;
+                }
+            }
+
+            input {
+                font: 400 1rem 'Inter', sans-serif;
+                padding: 0.75rem 1rem 0.75rem 1rem;
+                border-radius: 0.5rem;
+                border: 1.5px solid var(--input-border-color);
+                background: var(--background-color);
+                color: var(--gray-800);
+                outline: none;
+
+                &::placeholder {
+                    color: var(--gray-300);
+                }
+
+                &:hover {
+                    border: 1.5px solid var(--input-border-color-focus);
+                }
+
+                &:focus {
+                    border: 1.5px solid var(--input-border-color-focus);
+                    box-shadow: 0 4px 4px var(--gray-200);
+                }
+            }
+        }
+
+        .form-actions {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+    }
 `
 
 export const PageContent = styled.section`
