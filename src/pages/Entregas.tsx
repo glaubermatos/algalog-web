@@ -1,4 +1,5 @@
-import { useHistory } from 'react-router-dom'
+import { FaPlus } from 'react-icons/fa';
+import { Link, useHistory } from 'react-router-dom'
 
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/entregas";
@@ -13,12 +14,13 @@ export function Entregas() {
                 helpText="3 solicitações"
             >
                 <button className="button primary-light" onClick={() => history.push('/deliveries/new')}>
+                    <FaPlus size={14} />
                     Nova solicitação
                 </button>
             </Header>
             <Content>
                 <div className="card">
-                    <a href="#">
+                    <Link to="/deliveries/id">
                         <div className="header">
                             <div>
                                 <span>Data do pedido</span>
@@ -36,10 +38,10 @@ export function Entregas() {
                                 <strong>R$ 15.00</strong>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
                 <div className="card">
-                    <a href="#">
+                    <Link to="/deliveries/id">
                         <div className="header">
                             <div>
                                 <span>Data do pedido</span>
@@ -57,10 +59,10 @@ export function Entregas() {
                                 <strong>R$ 15.00</strong>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
                 <div className="card">
-                    <a href="#">
+                    <Link to="/deliveries/id">
                         <div className="header">
                             <div>
                                 <span>Data do pedido</span>
@@ -78,7 +80,7 @@ export function Entregas() {
                                 <strong>R$ 15.00</strong>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             </Content>
         </Container>

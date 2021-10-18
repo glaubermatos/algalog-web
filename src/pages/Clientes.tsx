@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/clientes";
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
+import { FaPlus } from 'react-icons/fa';
 
 export function Clientes() {
     const history = useHistory()
@@ -15,6 +16,7 @@ export function Clientes() {
                 helpText="2 clientes cadastrados"
             >
                 <button className="button primary-light" onClick={() => history.push('/customers/new')}>
+                    <FaPlus size={14} />
                     Novo cliente
                 </button>
             </Header>

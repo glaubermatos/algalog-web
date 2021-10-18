@@ -10,6 +10,7 @@ import { Clientes } from "./pages/Clientes";
 import { CadastroCliente } from './pages/CadastroCliente';
 import { Entregas } from './pages/Entregas';
 import { NovaEntrega } from './pages/NovaEntrega';
+import { DetalhesEntrega } from './pages/DetalhesEntrega';
 
 
 export function App() {
@@ -24,6 +25,7 @@ export function App() {
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/deliveries" exact component={Entregas} />
                 <Route path="/deliveries/new" component={NovaEntrega} />
+                <Route path="/deliveries/id" component={DetalhesEntrega} />
                 <Route path="/customers" exact component={Clientes} />
                 <Route path="/customers/new" component={CadastroCliente} />
               </Switch>

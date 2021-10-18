@@ -114,6 +114,10 @@ export const GlobalStyle = createGlobalStyle`
             background: var(--body-color);
             color: var(--primary-color-light);
         }
+
+        svg {
+            margin-right: 1rem;
+        }
     }
     
     form {
