@@ -1,17 +1,34 @@
+import { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { Link, useHistory } from 'react-router-dom'
 
+import { Delivery, DeliveryResponse } from '../types';
+
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/entregas";
+import { api } from '../services/api';
+import { formatDateTime, formatPrice } from '../utils/format';
 
 export function Entregas() {
     const history = useHistory()
+
+    const [deliveries, setDeliveries] = useState<Delivery[]>([])
+    const [deliveriesAmount, setDeliveriesAmount] = useState(0)
+
+    useEffect(() => {
+        api.get<DeliveryResponse>('/entregas')
+            .then(response => {
+                setDeliveries(response.data.entregas)
+                setDeliveriesAmount(response.data.entregas.length)
+            })
+    }, [])
+
     return(
         <Container>
             <Header 
                 iconName="entregas"
                 title="Solicitações de entrega"
-                helpText="3 solicitações"
+                helpText={`${deliveriesAmount} ${deliveriesAmount > 1 ? 'solicitações' : 'solicitação'}`}
             >
                 <button className="button primary-light" onClick={() => history.push('/deliveries/new')}>
                     <FaPlus size={14} />
@@ -19,69 +36,29 @@ export function Entregas() {
                 </button>
             </Header>
             <Content>
-                <div className="card">
-                    <Link to="/deliveries/id">
-                        <div className="header">
-                            <div>
-                                <span>Data do pedido</span>
-                                <strong>13/08/2021 23:55</strong>
+                {deliveries.map(delivery => (
+                    <div key={delivery.id} className="card">
+                        <Link to={`/deliveries/${delivery.id}`}>
+                            <div className="header">
+                                <div>
+                                    <span>Data do pedido</span>
+                                    <strong>{formatDateTime(new Date(delivery.dataPedido))}</strong>
+                                </div>
+                                <label className={`status ${delivery.status.toLowerCase()}`}>{delivery.status}</label>
                             </div>
-                            <label className="status cancelada">Cancelada</label>
-                        </div>
-                        <div className="body">
-                            <div className="cliente">
-                                <label>Cliente</label>
-                                <p>João das Couves</p>
+                            <div className="body">
+                                <div className="cliente">
+                                    <label>Cliente</label>
+                                    <p>{delivery.cliente.nome}</p>
+                                </div>
+                                <div className="taxa">
+                                    <label>Taxa de entrega</label>
+                                    <strong>{formatPrice(delivery.taxa)}</strong>
+                                </div>
                             </div>
-                            <div className="taxa">
-                                <label>Taxa de entrega</label>
-                                <strong>R$ 15.00</strong>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-                <div className="card">
-                    <Link to="/deliveries/id">
-                        <div className="header">
-                            <div>
-                                <span>Data do pedido</span>
-                                <strong>13/08/2021 23:55</strong>
-                            </div>
-                            <label className="status pendente">Pendente</label>
-                        </div>
-                        <div className="body">
-                            <div className="cliente">
-                                <label>Cliente</label>
-                                <p>João das Couves</p>
-                            </div>
-                            <div className="taxa">
-                                <label>Taxa de entrega</label>
-                                <strong>R$ 15.00</strong>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-                <div className="card">
-                    <Link to="/deliveries/id">
-                        <div className="header">
-                            <div>
-                                <span>Data do pedido</span>
-                                <strong>13/08/2021 23:55</strong>
-                            </div>
-                            <label className="status finalizado">Finalizada</label>
-                        </div>
-                        <div className="body">
-                            <div className="cliente">
-                                <label>Cliente</label>
-                                <p>João das Couves</p>
-                            </div>
-                            <div className="taxa">
-                                <label>Taxa de entrega</label>
-                                <strong>R$ 15.00</strong>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
+                        </Link>
+                    </div>
+                ))}
             </Content>
         </Container>
     )

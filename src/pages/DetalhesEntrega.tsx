@@ -1,16 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft, FaPlus } from "react-icons/fa";
 
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/detalhes-entrega";
+import { useEffect } from "react";
+
+interface DetalhesEntregaParams {
+    id: string
+}
 
 export function DetalhesEntrega() {
+    const { id } = useParams<DetalhesEntregaParams>()
+
+    useEffect(() => {
+        const codigo = Number(id)
+    }, [])
+
     return(
         <Container>
             <Header
                 iconName="entregas" 
                 title="Detalhes da entrega"
-                helpText="Entrega Nº 47"
+                helpText={`Entrega Nº ${id}`}
             >
                 <Link to="/deliveries">
                     <FaArrowLeft size={14} color="#0C1D0E" />

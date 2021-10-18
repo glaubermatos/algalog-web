@@ -1,10 +1,30 @@
-import { Link } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { FaArrowLeft } from 'react-icons/fa'
 
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/cadastro-cliente";
+import { api } from "../services/api";
 
 export function CadastroCliente() {
+    
+    const history = useHistory()
+
+    const [nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [telefone, setTelefone] = useState('')
+
+    async function handleSubmit(event: FormEvent) {
+        event.preventDefault()
+
+        const response = await api.post('/clientes', {nome, email, telefone})
+        if(response.status === 201) {
+            console.log(response.data)
+            alert(`Cadastro realizado com sucesso`)
+            history.push('/customers')
+        }
+    }
+
     return(
         <Container>
             <Header 
@@ -18,7 +38,7 @@ export function CadastroCliente() {
                 </Link>
             </Header>
             <Content>
-                <form action="#" autoComplete="off">
+                <form onSubmit={handleSubmit} autoComplete="off">
                     <div className="form-group">
                         <label htmlFor="nome">Nome</label>
                         <input
@@ -26,25 +46,31 @@ export function CadastroCliente() {
                             id="nome"
                             name="nome"
                             placeholder="Informe o nome do cliente"
+                            value={nome}
+                            onChange={(event) => setNome(event.target.value)}
                         />
                     </div>
                     <div className="form-inline">
                         <div className="form-group">
-                            <label htmlFor="logradouro">Logradouro</label>
+                            <label htmlFor="email">Email</label>
                             <input
                             type="text"
-                            id="logradouro"
-                            name="logradouro"
-                            placeholder="Nome da rua para entrega"
+                            id="email"
+                            name="email"
+                            placeholder="Endereço de email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="numero">Número</label>
+                            <label htmlFor="telefone">Telefone</label>
                             <input
                             type="text"
-                            id="numero"
-                            name="numero"
-                            placeholder="Informe o número"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="Informe o número de telefone"
+                            value={telefone}
+                            onChange={(event) => setTelefone(event.target.value)}
                             />
                         </div>
                     </div>

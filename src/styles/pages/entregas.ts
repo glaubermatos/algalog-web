@@ -76,7 +76,7 @@ export const Content = styled(PageContent)`
                     color: var(--status-pedido-pendente);
                 }
 
-                &.cancelada {
+                &.cancelado {
                     border: 1px solid var(--status-pedido-cancelado);
                     background: var(--status-pedido-cancelado-light);
                     color: var(--status-pedido-cancelado);
