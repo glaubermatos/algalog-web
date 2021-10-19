@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
     :root {
         /*Colors HUE*/
-        --hue: 128;
+        --hue: 210;
         
         --hue-danger: 358;
         --hue-status-pedido-pendente: 209;

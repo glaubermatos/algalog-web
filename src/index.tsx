@@ -128,6 +128,19 @@ createServer({
       return this.schema.all('entrega')
     })
 
+    this.post('/entregas', (schema, request) => {
+      const data = JSON.parse(request.requestBody)
+      
+      const newDelivery = {
+        ...data, 
+        status: 'PENDENTE', 
+        dataPedido: new Date(),
+        dataFinalização: null
+      }
+
+      return schema.create('entrega', newDelivery)
+    })
+
     this.get('/clientes', () => {
       return this.schema.all('cliente')
       // return [

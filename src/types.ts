@@ -31,3 +31,17 @@ export interface Delivery {
 export interface DeliveryResponse {
     entregas: Delivery[]
 }
+
+export interface DeliveryInput {
+    cliente: {
+        id: number
+    },
+    destinatario: {
+        nome: string,
+        logradouro: string,
+        numero: string,
+        complemento: string,
+        bairro: string
+    },
+    taxa: number
+}

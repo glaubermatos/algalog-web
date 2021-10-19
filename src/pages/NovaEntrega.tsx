@@ -1,9 +1,45 @@
+import { FormEvent, useState } from "react";
 import { FaArrowLeft, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 import { Header } from "../components/Header";
+import { api } from "../services/api";
 import { Container, Content } from "../styles/pages/nova-entrega";
+import { DeliveryInput } from "../types";
 
 export function NovaEntrega() {
+    const [clienteID, setClienteId] = useState(0)
+    const [nomeDestinatario, setNomeDestinatario] = useState('')
+    const [logradouro, setLogradouro] = useState('')
+    const [numero, setNumero] = useState('')
+    const [complemento, setComplemento] = useState('')
+    const [bairro, setBairro] = useState('')
+    const [taxa, setTaxa] = useState(0)
+
+    function handleSubmit(event: FormEvent) {
+        event.preventDefault()
+
+        const data: DeliveryInput = {
+            cliente: {
+                id: clienteID,
+            },
+            destinatario: {
+                nome: nomeDestinatario,
+                logradouro,
+                numero,
+                complemento,
+                bairro,
+            },
+            taxa
+        }
+
+        api.post('/entregas', data)
+            .then(response => {
+                console.log(response.data)
+                alert('Nova entrega emitida com sucesso!')
+            })
+    }
+
     return(
         <Container>
             <Header
@@ -17,7 +53,7 @@ export function NovaEntrega() {
                 </Link>
             </Header>
             <Content>
-                <form action="#" autoComplete="off">
+                <form onSubmit={handleSubmit} autoComplete="off">
                     <div className="form-group">
                         <label htmlFor="cliente">Cliente</label>
                         <div className="input-group">
@@ -29,6 +65,8 @@ export function NovaEntrega() {
                                 id="cliente"
                                 name="cliente"
                                 placeholder="Pesquisar cliente ..."
+                                value={clienteID}
+                                onChange={(event) => setClienteId(Number(event.target.value))}
                             />
                         </div>
                     </div>
@@ -43,6 +81,8 @@ export function NovaEntrega() {
                                 id="taxa"
                                 name="taxa"
                                 placeholder="Valor da taxa de entrega"
+                                value={taxa}
+                                onChange={(event) => setTaxa(Number(event.target.value))}
                             />
                         </div>
                     </div>
@@ -55,6 +95,8 @@ export function NovaEntrega() {
                             id="logradouro"
                             name="logradouro"
                             placeholder="Nome da rua para entrega"
+                            value={logradouro}
+                            onChange={(event) => setLogradouro(event.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -64,6 +106,8 @@ export function NovaEntrega() {
                             id="numero"
                             name="numero"
                             placeholder="Informe o número"
+                            value={numero}
+                            onChange={(event) => setNumero(event.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -73,6 +117,8 @@ export function NovaEntrega() {
                             id="complemento"
                             name="complemento"
                             placeholder="Complemento"
+                            value={complemento}
+                            onChange={(event) => setComplemento(event.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -82,6 +128,8 @@ export function NovaEntrega() {
                             id="bairro"
                             name="bairro"
                             placeholder="Bairro para entrega"
+                            value={bairro}
+                            onChange={(event) => setBairro(event.target.value)}
                             />
                         </div>
                     </div>
