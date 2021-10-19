@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
     :root {
         /*Colors HUE*/
-        --hue: 210;
+        --hue: 128;
         
         --hue-danger: 358;
         --hue-status-pedido-pendente: 209;
@@ -73,7 +73,7 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 400;
     }
 
-    a.button {
+    a {
         display: inline-flex;
         text-decoration: none;
     }
@@ -86,6 +86,28 @@ export const GlobalStyle = createGlobalStyle`
     [disabled] {
         opacity: 0.6;
         cursor: not-allowed;
+    }
+
+    .link-button {
+        height: 3rem; /*48px*/
+        text-transform: uppercase;
+        letter-spacing: 0.07875rem; /*1.26px = 9%*/
+        font: 600 0.75rem "Inter", sans-serif; /*14px*/
+
+        background: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: filter 0.3s;
+
+        &:hover {
+            filter: brightness(0.9);
+        }
+
+        svg {
+            margin-right: 1rem;
+        }
     }
 
     .button {
@@ -198,6 +220,85 @@ export const GlobalStyle = createGlobalStyle`
             margin-top: 2.5rem;
             display: flex;
             gap: 1rem;
+        }
+    }
+
+    .react-modal-overlay {
+		background: rgba(0, 0, 0, 0.5);
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+        z-index: 200;
+		
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.react-modal-content {
+        height: 100%;
+		width: 85%;
+		max-width: 35rem;
+		background: var(--background-color);
+        padding: 4rem 3rem;
+
+        transform: translateX(35rem);
+        transition: all 400ms ease;
+	}
+
+    .ReactModal__Content--after-open {
+        transform: translateX(0);
+    }
+
+    .ReactModal__Overlay {
+        opacity: 0;
+        transition: all 500ms ease-in-out;
+    }
+
+    .ReactModal__Overlay--after-open {
+        opacity: 1;
+    }
+
+    .ReactModal__Overlay--before-close {
+        opacity: 0;
+    }
+    
+    .client-list {
+        margin-top: 2.5rem;
+
+        .client-list__item {
+            padding-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            opacity: 0.75;
+            transition: opacity 0.3s;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            & + .client-list__item {
+                border-top: 1px solid var(--gray-100);
+                padding-top: 1.5rem;
+            }
+        }
+
+        .client-list__item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            strong {
+                color: var(--gray-600);
+            }
+
+            span {
+                color: var(--gray-500);
+            }
         }
     }
 `

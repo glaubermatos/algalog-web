@@ -1,11 +1,10 @@
 import { useHistory } from 'react-router-dom'
+import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
 
+import { api } from '../services/api';
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/clientes";
-import { FiEdit2, FiTrash2 } from 'react-icons/fi'
-import { FaPlus } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { api } from '../services/api';
 import { Customer, CustomerResponse } from '../types';
 
 export function Clientes() {
@@ -30,7 +29,7 @@ export function Clientes() {
                 helpText={`${customersAmount} ${customersAmount > 1 ? 'clientes cadastrados' : 'cliente cadastrado'}`}
             >
                 <button className="button primary-light" onClick={() => history.push('/customers/new')}>
-                    <FaPlus size={14} />
+                    <FiPlus size={19} />
                     Novo cliente
                 </button>
             </Header>

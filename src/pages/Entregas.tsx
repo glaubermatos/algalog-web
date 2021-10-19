@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FiPlus } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom'
 
 import { Delivery, DeliveryResponse } from '../types';
@@ -31,7 +31,7 @@ export function Entregas() {
                 helpText={`${deliveriesAmount} ${deliveriesAmount > 1 ? 'solicitações' : 'solicitação'}`}
             >
                 <button className="button primary-light" onClick={() => history.push('/deliveries/new')}>
-                    <FaPlus size={14} />
+                    <FiPlus size={20} />
                     Nova solicitação
                 </button>
             </Header>

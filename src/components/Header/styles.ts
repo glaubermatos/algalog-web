@@ -26,7 +26,8 @@ export const Container = styled.header`
 
     .actions {
 
-        a {
+        a,
+        .link-button {
             font: 500 0.75rem 'Inter', sans-serif;
             line-height: 1.09375rem;
             color: var(--gray-800);

@@ -9,7 +9,7 @@ export const Content = styled(PageContent)`
 
     box-shadow: 0px 4px 20px var(--box-shadow-color);
     
-    padding: 2.5rem;    
+    padding: 2.5rem;
     
     /* devices: > 1024 */
     @media (min-width: 1024px) {

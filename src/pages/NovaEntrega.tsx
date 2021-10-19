@@ -1,13 +1,17 @@
 import { FormEvent, useState } from "react";
-import { FaArrowLeft, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Modal from 'react-modal'
+import { FiArrowLeft, FiChevronRight, FiSearch, FiX } from "react-icons/fi";
 
 import { Header } from "../components/Header";
 import { api } from "../services/api";
 import { Container, Content } from "../styles/pages/nova-entrega";
-import { DeliveryInput } from "../types";
 
 export function NovaEntrega() {
+    const history = useHistory()
+
+    const [isSearchCustomerModalOpen, setIsSearchCustomerModalOpen] = useState(false)
+
     const [clienteID, setClienteId] = useState(0)
     const [nomeDestinatario, setNomeDestinatario] = useState('')
     const [logradouro, setLogradouro] = useState('')
@@ -19,9 +23,10 @@ export function NovaEntrega() {
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
-        const data: DeliveryInput = {
+        const data = {
             cliente: {
                 id: clienteID,
+                nome: nomeDestinatario
             },
             destinatario: {
                 nome: nomeDestinatario,
@@ -40,6 +45,14 @@ export function NovaEntrega() {
             })
     }
 
+    function handleOpenSearchCustomerModal() {
+        setIsSearchCustomerModalOpen(true)
+    }
+
+    function handleCloseSearchCustomerModal() {
+        setIsSearchCustomerModalOpen(false)
+    }
+
     return(
         <Container>
             <Header
@@ -48,7 +61,7 @@ export function NovaEntrega() {
                 helpText="Preencha o formulário abaixo para solicitar nova entrega"
             >
                 <Link to="/deliveries">
-                    <FaArrowLeft size={14} color="#0C1D0E" />
+                    <FiArrowLeft size={19} color="#0C1D0E" />
                     Voltar
                 </Link>
             </Header>
@@ -58,14 +71,16 @@ export function NovaEntrega() {
                         <label htmlFor="cliente">Cliente</label>
                         <div className="input-group">
                             <span className="input-group-addon">
-                                <FaSearch size={18} color="#0C1D0E"/>
+                                <FiSearch size={18} color="#0C1D0E"/>
                             </span>
                             <input
                                 type="text"
                                 id="cliente"
                                 name="cliente"
                                 placeholder="Pesquisar cliente ..."
-                                value={clienteID}
+                                readOnly
+                                onClick={handleOpenSearchCustomerModal}
+                                value={nomeDestinatario}
                                 onChange={(event) => setClienteId(Number(event.target.value))}
                             />
                         </div>
@@ -135,13 +150,68 @@ export function NovaEntrega() {
                     </div>
                     <div className="form-actions">
                         <button className="button primary-light" type="submit">
-                            Solicitar
+                            Solicitar entrega
                         </button>
-                        <a href="#" className="button default">
+                        <button 
+                            type="button" 
+                            className="button default"
+                            onClick={() => history.push('/deliveries')}
+                        >
                             Cancelar
-                        </a>
+                        </button>
                     </div>
               </form>
+              <Modal
+                isOpen={isSearchCustomerModalOpen}
+                onRequestClose={handleCloseSearchCustomerModal}
+                overlayClassName="react-modal-overlay"
+                className="react-modal-content"
+              >
+                <Header title="Pesquisar cliente">
+                    <button className="link-button" onClick={handleCloseSearchCustomerModal}>
+                        <FiX size={19} color="#0C1D0E" />
+                        Fechar
+                    </button>
+                </Header>
+                <form style={{marginTop: '3rem'}}>
+                    <div className="form-group">
+                        <label htmlFor="nomeCliente">Cliente</label>
+                        <input
+                            type="text"
+                            id="nomeCliente"
+                            name="nome"
+                            placeholder="Digite o nome do cliente para pesquisar"
+                        />
+                    </div>
+                </form>
+                <div className="client-list">
+                    <a className="client-list__item" onClick={() => {
+                        setClienteId(1)
+                        setNomeDestinatario('Glauber de Oliveira Matos')
+                        handleCloseSearchCustomerModal()
+                    }}>
+                        <div className="client-list__item-info">
+                            <strong>Glauber de Oliveira Matos</strong>
+                            <span>(73) 98178-7390</span>
+                        </div>
+                        <FiChevronRight size={24} />
+                    </a>
+                    <a className="client-list__item" href="#">
+                        <div className="client-list__item-info">
+                            <strong>Glauber de Oliveira Matos</strong>
+                            <span>(73) 98178-7390</span>
+                        </div>
+                        <FiChevronRight size={24} />
+                    </a>
+                    <a className="client-list__item" href="#">
+                        <div className="client-list__item-info">
+                            <strong>Glauber de Oliveira Matos</strong>
+                            <span>(73) 98178-7390</span>
+                        </div>
+                        <FiChevronRight size={24} />
+                    </a>
+          </div>
+              </Modal>
             </Content>
         </Container>
     )

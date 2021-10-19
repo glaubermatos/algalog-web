@@ -78,9 +78,13 @@ export function CadastroCliente() {
                         <button className="button primary-light" type="submit">
                             Cadastrar
                         </button>
-                        <a href="#" className="button default">
+                        <button 
+                            type="button"
+                            className="button default"
+                            onClick={() => history.push('/customers')}
+                         >
                             Cancelar
-                        </a>
+                        </button>
                     </div>
                 </form>
             </Content>

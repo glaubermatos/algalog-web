@@ -4,9 +4,9 @@ import { Title } from "../../styles/global";
 import { ReactNode } from "react";
 
 interface HeaderProps {
-    iconName: 'home' | 'entregas' | 'clientes';
+    iconName?: 'home' | 'entregas' | 'clientes';
     title: string;
-    helpText: string;
+    helpText?: string;
     children?: ReactNode;
 }
 
@@ -14,10 +14,14 @@ export function Header({iconName, title, helpText, children}: HeaderProps) {
     return(
         <Container>
             <div className="info-container">
-                <Icon size={36} name={ iconName } color="gray" />
+                {iconName ? (
+                    <Icon size={36} name={ iconName } color="gray" />
+                ) : (<></>)}
                 <div className="box-title">
                     <Title>{ title }</Title>
-                    <span>{ helpText }</span>
+                    {helpText ? (
+                        <span>{ helpText }</span>
+                    ) : (<></>)}
                 </div>
             </div>
             <div className="actions">
