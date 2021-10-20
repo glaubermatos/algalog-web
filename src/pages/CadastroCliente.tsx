@@ -5,6 +5,12 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/cadastro-cliente";
 import { api } from "../services/api";
+import { Customer } from "../types";
+import { toast } from "react-toastify";
+
+interface ResponseCustomer {
+    cliente: Customer
+}
 
 export function CadastroCliente() {
     
@@ -17,10 +23,9 @@ export function CadastroCliente() {
     async function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
-        const response = await api.post('/clientes', {nome, email, telefone})
+        const response = await api.post<ResponseCustomer>('/clientes', {nome, email, telefone})
         if(response.status === 201) {
-            console.log(response.data)
-            alert(`Cadastro realizado com sucesso`)
+            toast.success(`Cliente cadastrado com sucesso!`)
             history.push('/customers')
         }
     }

@@ -192,7 +192,7 @@ export const GlobalStyle = createGlobalStyle`
                 }
             }
 
-            input {
+            input, textarea {
                 font: 400 1rem 'Inter', sans-serif;
                 padding: 0.75rem 1rem 0.75rem 1rem;
                 border-radius: 0.5rem;

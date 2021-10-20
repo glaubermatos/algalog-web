@@ -3,6 +3,8 @@ import { FaArrowLeft, FaPlus } from "react-icons/fa";
 
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/detalhes-entrega";
+import { useState } from "react";
+import { NewOccurrenceModal } from "../components/NewOccurrenceModal";
 
 interface DetalhesEntregaParams {
     id: string
@@ -10,6 +12,16 @@ interface DetalhesEntregaParams {
 
 export function DetalhesEntrega() {
     const { id } = useParams<DetalhesEntregaParams>()
+
+    const [isNewOccurrenceModalOpen, setIsNewOccurrenceModalOpen] = useState(false)
+
+    function handleOpenNewOccurrenceModal() {
+        setIsNewOccurrenceModalOpen(true)
+    }
+
+    function handleCloseNewOccurrenceModal() {
+        setIsNewOccurrenceModalOpen(false)
+    }
 
     return(
         <Container>
@@ -36,6 +48,13 @@ export function DetalhesEntrega() {
                     <div>
                         <span>Data finalização</span>
                         <strong>13/08/2021 23:55</strong>
+                    </div>
+                    <div>
+                        <select className="primary-extra-light" name="" id="">
+                        <option value="">Pendente</option>
+                        <option value="">Finalizada</option>
+                        <option value="">Cancelada</option>
+                        </select>
                     </div>
                 </div>
                 <div className="body">
@@ -95,7 +114,11 @@ export function DetalhesEntrega() {
                             <span className="ocorrencias-total">3 ocorrências</span>
                         </div>
                         <div className="actions">
-                            <button id="btnNovaOcorrencia" className="button primary-light">
+                            <button
+                                id="btnNovaOcorrencia"
+                                className="button primary-light"
+                                onClick={handleOpenNewOccurrenceModal}
+                            >
                                 <FaPlus size={14} />
                                 Nova ocorrência
                             </button>
@@ -116,6 +139,11 @@ export function DetalhesEntrega() {
                         </ul>
                     </section>
                 </div>
+
+                <NewOccurrenceModal
+                    isOpen={isNewOccurrenceModalOpen}
+                    onRequestClose={handleCloseNewOccurrenceModal}
+                />
             </Content>
         </Container>
     )

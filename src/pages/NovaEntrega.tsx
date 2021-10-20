@@ -10,6 +10,8 @@ import { Header } from "../components/Header";
 import { SearchCustomerModal } from "../components/SearchCustomerModal";
 
 import { Container, Content } from "../styles/pages/nova-entrega";
+import { toast } from "react-toastify";
+import { formatPrice } from "../utils/format";
 
 interface ResponseDelivery {
     entrega: Delivery;
@@ -48,7 +50,7 @@ export function NovaEntrega() {
 
         try {
             const response = await api.post<ResponseDelivery>('/entregas', data)
-            alert(`Entrega Nº ${response.data.entrega.id} emitida com sucesso!`)
+            toast.success(`Entrega Nº ${response.data.entrega.id} emitida com sucesso!`)
             history.push('/deliveries')
         } catch(error) {
             alert(error)
@@ -107,12 +109,14 @@ export function NovaEntrega() {
                                 R$
                             </span>
                             <input
-                                type="text"
+                                type="number"
                                 id="taxa"
                                 name="taxa"
                                 placeholder="Valor da taxa de entrega"
                                 value={taxa}
-                                onChange={(event) => setTaxa(Number(event.target.value))}
+                                onChange={(event) => {
+                                    setTaxa(Number(event.target.value))
+                                }}
                             />
                         </div>
                     </div>

@@ -1,5 +1,7 @@
 import { BrowserRouter, Switch, Route} from 'react-router-dom'
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import { Content } from "./components/Content";
 import { MainContainer } from "./components/MainContainer";
 import { SideBar } from "./components/SideBar";
@@ -12,11 +14,17 @@ import { Entregas } from './pages/Entregas';
 import { NovaEntrega } from './pages/NovaEntrega';
 import { DetalhesEntrega } from './pages/DetalhesEntrega';
 
+import 'react-toastify/dist/ReactToastify.min.css'
+
 
 export function App() {
+
   return (
     <>
       <GlobalStyle />
+      <ToastContainer
+        position="top-right" 
+      />
       <BrowserRouter>
         <SideBar />
         <MainContainer>
