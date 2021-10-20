@@ -211,7 +211,7 @@ export const GlobalStyle = createGlobalStyle`
 
                 &:focus {
                     border: 1.5px solid var(--input-border-color-focus);
-                    box-shadow: 0 4px 4px var(--gray-200);
+                    box-shadow: 2px 3px 4px var(--gray-100);
                 }
             }
         }

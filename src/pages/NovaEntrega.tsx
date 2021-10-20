@@ -1,11 +1,19 @@
 import { FormEvent, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Modal from 'react-modal'
-import { FiArrowLeft, FiChevronRight, FiSearch, FiX } from "react-icons/fi";
+import { FiArrowLeft, FiSearch } from "react-icons/fi";
+
+import { api } from "../services/api";
+
+import { Delivery } from '../types'
 
 import { Header } from "../components/Header";
-import { api } from "../services/api";
+import { SearchCustomerModal } from "../components/SearchCustomerModal";
+
 import { Container, Content } from "../styles/pages/nova-entrega";
+
+interface ResponseDelivery {
+    entrega: Delivery;
+}
 
 export function NovaEntrega() {
     const history = useHistory()
@@ -20,7 +28,7 @@ export function NovaEntrega() {
     const [bairro, setBairro] = useState('')
     const [taxa, setTaxa] = useState(0)
 
-    function handleSubmit(event: FormEvent) {
+    async function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
         const data = {
@@ -38,11 +46,18 @@ export function NovaEntrega() {
             taxa
         }
 
-        api.post('/entregas', data)
-            .then(response => {
-                console.log(response.data)
-                alert('Nova entrega emitida com sucesso!')
-            })
+        try {
+            const response = await api.post<ResponseDelivery>('/entregas', data)
+            alert(`Entrega Nº ${response.data.entrega.id} emitida com sucesso!`)
+            history.push('/deliveries')
+        } catch(error) {
+            alert(error)
+        }
+    }
+
+    function handleCustomerSelected(id: number, name: string) {
+        setClienteId(id)
+        setNomeDestinatario(name)
     }
 
     function handleOpenSearchCustomerModal() {
@@ -161,57 +176,11 @@ export function NovaEntrega() {
                         </button>
                     </div>
               </form>
-              <Modal
+              <SearchCustomerModal
                 isOpen={isSearchCustomerModalOpen}
                 onRequestClose={handleCloseSearchCustomerModal}
-                overlayClassName="react-modal-overlay"
-                className="react-modal-content"
-              >
-                <Header title="Pesquisar cliente">
-                    <button className="link-button" onClick={handleCloseSearchCustomerModal}>
-                        <FiX size={19} color="#0C1D0E" />
-                        Fechar
-                    </button>
-                </Header>
-                <form style={{marginTop: '3rem'}}>
-                    <div className="form-group">
-                        <label htmlFor="nomeCliente">Cliente</label>
-                        <input
-                            type="text"
-                            id="nomeCliente"
-                            name="nome"
-                            placeholder="Digite o nome do cliente para pesquisar"
-                        />
-                    </div>
-                </form>
-                <div className="client-list">
-                    <a className="client-list__item" onClick={() => {
-                        setClienteId(1)
-                        setNomeDestinatario('Glauber de Oliveira Matos')
-                        handleCloseSearchCustomerModal()
-                    }}>
-                        <div className="client-list__item-info">
-                            <strong>Glauber de Oliveira Matos</strong>
-                            <span>(73) 98178-7390</span>
-                        </div>
-                        <FiChevronRight size={24} />
-                    </a>
-                    <a className="client-list__item" href="#">
-                        <div className="client-list__item-info">
-                            <strong>Glauber de Oliveira Matos</strong>
-                            <span>(73) 98178-7390</span>
-                        </div>
-                        <FiChevronRight size={24} />
-                    </a>
-                    <a className="client-list__item" href="#">
-                        <div className="client-list__item-info">
-                            <strong>Glauber de Oliveira Matos</strong>
-                            <span>(73) 98178-7390</span>
-                        </div>
-                        <FiChevronRight size={24} />
-                    </a>
-          </div>
-              </Modal>
+                onCustomerSelected={handleCustomerSelected}
+              />
             </Content>
         </Container>
     )

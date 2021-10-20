@@ -3,7 +3,6 @@ import { FaArrowLeft, FaPlus } from "react-icons/fa";
 
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/detalhes-entrega";
-import { useEffect } from "react";
 
 interface DetalhesEntregaParams {
     id: string
@@ -11,10 +10,6 @@ interface DetalhesEntregaParams {
 
 export function DetalhesEntrega() {
     const { id } = useParams<DetalhesEntregaParams>()
-
-    useEffect(() => {
-        const codigo = Number(id)
-    }, [])
 
     return(
         <Container>
