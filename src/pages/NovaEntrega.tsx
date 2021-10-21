@@ -11,11 +11,6 @@ import { SearchCustomerModal } from "../components/SearchCustomerModal";
 
 import { Container, Content } from "../styles/pages/nova-entrega";
 import { toast } from "react-toastify";
-import { formatPrice } from "../utils/format";
-
-interface ResponseDelivery {
-    entrega: Delivery;
-}
 
 export function NovaEntrega() {
     const history = useHistory()
@@ -35,8 +30,7 @@ export function NovaEntrega() {
 
         const data = {
             cliente: {
-                id: clienteID,
-                nome: nomeDestinatario
+                id: clienteID
             },
             destinatario: {
                 nome: nomeDestinatario,
@@ -49,10 +43,13 @@ export function NovaEntrega() {
         }
 
         try {
-            const response = await api.post<ResponseDelivery>('/entregas', data)
-            toast.success(`Entrega Nº ${response.data.entrega.id} emitida com sucesso!`)
+            const response = await api.post<Delivery>('/entregas', data)
+            const delivery = response.data
+            
+            toast.success(`Entrega Nº ${delivery.id} emitida com sucesso!`)
             history.push('/deliveries')
         } catch(error) {
+            console.log(error)
             alert(error)
         }
     }

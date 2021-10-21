@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route} from 'react-router-dom'
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import { Content } from "./components/Content";
 import { MainContainer } from "./components/MainContainer";
@@ -23,6 +23,7 @@ export function App() {
     <>
       <GlobalStyle />
       <ToastContainer
+        theme="light"
         position="top-right" 
       />
       <BrowserRouter>

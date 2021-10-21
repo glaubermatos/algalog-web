@@ -19,8 +19,8 @@ export const Content = styled(PageContent)`
         background: var(--background-color);
         filter: brightness(0.99);
 
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         align-items: center;
 
         div {
@@ -40,6 +40,38 @@ export const Content = styled(PageContent)`
                 color: var(--gray-800);
             }   
         }
+
+        select {
+            height: 2.5rem;
+            font: 600 0.9375rem "Inter", sans-serif;
+            text-transform: uppercase;
+            border-radius: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        select.pendente {
+            background: var(--status-pedido-pendente-light);
+            border: 1.5px solid var(--status-pedido-pendente);
+            color: var(--status-pedido-pendente)
+        }
+
+        select.cancelado {
+            background: var(--status-pedido-cancelado-light);
+            border: 1.5px solid var(--status-pedido-cancelado);
+            color: var(--status-pedido-cancelado)
+        }
+
+        select.finalizado {
+            background: var(--status-pedido-finalizado-light);
+            border: 1.5px solid var(--status-pedido-finalizado);
+            color: var(--status-pedido-finalizado)
+        }
+
+        select option {
+            background: var(--background-color);
+            color: var(--gray-600);
+        }
+
     }
 
     .body {

@@ -5,10 +5,6 @@ export interface Customer {
     telefone: string;
 }
 
-export interface CustomerResponse {
-    clientes: Customer[]
-}
-
 export interface Delivery {
     id: number,
     cliente: {
@@ -28,10 +24,6 @@ export interface Delivery {
     dataFinalizacao: string
 }
 
-export interface DeliveryResponse {
-    entregas: Delivery[]
-}
-
 export interface DeliveryInput {
     cliente: {
         id: number
@@ -44,4 +36,10 @@ export interface DeliveryInput {
         bairro: string
     },
     taxa: number
+}
+
+export interface Occurrence {
+    id: number;
+    descricao: string;
+    dataRegistro: string;
 }

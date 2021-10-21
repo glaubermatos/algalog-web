@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom'
 
-import { Delivery, DeliveryResponse } from '../types';
+import { Delivery } from '../types';
 
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/entregas";
@@ -16,10 +16,10 @@ export function Entregas() {
     const [deliveriesAmount, setDeliveriesAmount] = useState(0)
 
     useEffect(() => {
-        api.get<DeliveryResponse>('/entregas')
+        api.get<Delivery[]>('/entregas')
             .then(response => {
-                setDeliveries(response.data.entregas)
-                setDeliveriesAmount(response.data.entregas.length)
+                setDeliveries(response.data)
+                setDeliveriesAmount(response.data.length)
             })
     }, [])
 

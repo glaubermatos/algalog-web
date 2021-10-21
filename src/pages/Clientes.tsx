@@ -5,7 +5,7 @@ import { api } from '../services/api';
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/clientes";
 import { useEffect, useState } from 'react';
-import { Customer, CustomerResponse } from '../types';
+import { Customer } from '../types';
 
 export function Clientes() {
     const history = useHistory()
@@ -14,10 +14,11 @@ export function Clientes() {
     const [customersAmount, setCustomersAmount] = useState(0)
 
     useEffect(() => {
-        api.get<CustomerResponse>('/clientes')
+        api.get<Customer[]>('/clientes')
             .then(response => {
-                setCustomers(response.data.clientes)
-                setCustomersAmount(response.data.clientes.length)
+                const clientes = response.data
+                setCustomers(clientes)
+                setCustomersAmount(clientes.length)
             })
     }, [])
 

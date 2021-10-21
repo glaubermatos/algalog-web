@@ -3,15 +3,90 @@ import { FaArrowLeft, FaPlus } from "react-icons/fa";
 
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/detalhes-entrega";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { NewOccurrenceModal } from "../components/NewOccurrenceModal";
+import { api } from "../services/api";
+import { Delivery, Occurrence } from "../types";
+import { formatDateTime, formatPrice } from "../utils/format";
+import { toast } from "react-toastify";
 
 interface DetalhesEntregaParams {
     id: string
 }
 
+interface DeliveryFormatted {
+    id: number,
+    cliente: {
+        id: number,
+        nome: string
+    },
+    destinatario: {
+        nome: string,
+        logradouro: string,
+        numero: string,
+        complemento: string,
+        bairro: string
+    },
+    taxa: number,
+    taxaFormatada: string,
+    status: 'FINALIZADO' | 'PENDENTE' | 'CANCELADO',
+    dataPedido: string,
+    dataFinalizacao: string
+}
+
 export function DetalhesEntrega() {
     const { id } = useParams<DetalhesEntregaParams>()
+
+    const [deliveryFormatted, setDeliveryFormatted] = useState<DeliveryFormatted>()
+    const [occurrences, setOccurrences] = useState<Occurrence[]>([])
+    const [reload, setReload] = useState(false)
+
+    useEffect(() => {
+        api.get<Delivery>(`/entregas/${Number(id)}`)
+            .then(response => {
+                const delivery = response.data
+
+                setDeliveryFormatted({
+                    ...delivery,
+                    taxaFormatada: formatPrice(delivery.taxa),
+                    dataPedido: formatDateTime(new Date(delivery.dataPedido)),
+                    dataFinalizacao: delivery.dataFinalizacao !== null ? formatDateTime(new Date(delivery.dataFinalizacao)) : '-'
+                })
+            })
+            
+        api.get<Occurrence[]>(`/entregas/${id}/ocorrencias`)
+            .then(response => {
+                const occurrences = response.data.map(occurrence => ({
+                    ...occurrence,
+                    dataRegistro: formatDateTime(new Date(occurrence.dataRegistro))
+                }))
+                setOccurrences(occurrences)
+            })   
+
+    }, [id, reload])
+
+    async function handleChangeStatusDelivery(event: ChangeEvent<HTMLSelectElement>) {
+        const status = event.target.value
+
+        if(status === 'FINALIZADO') {
+            const response = await api.put(`/entregas/${id}/finalizacao`)
+            if (response.status === 204) {
+                setReload(true)
+                toast.success(`Pedido de Entrega Nº ${id} finalizado`)
+            }
+        }
+    }
+
+    function loadOcorrencias() {
+        api.get<Occurrence[]>(`/entregas/${id}/ocorrencias`)
+        .then(response => {
+            const occurrences = response.data.map(occurrence => ({
+                ...occurrence,
+                dataRegistro: formatDateTime(new Date(occurrence.dataRegistro))
+            }))
+            setOccurrences(occurrences)
+        })
+    }
 
     const [isNewOccurrenceModalOpen, setIsNewOccurrenceModalOpen] = useState(false)
 
@@ -39,21 +114,27 @@ export function DetalhesEntrega() {
                 <div className="header">
                     <div>
                         <span>Data do pedido</span>
-                        <strong>13/08/2021 23:55</strong>
+                        <strong>{deliveryFormatted?.dataPedido}</strong>
                     </div>
                     <div>
                         <span>Taxa de entrega</span>
-                        <strong>R$ 25.00</strong>
+                        <strong>{deliveryFormatted?.taxaFormatada}</strong>
                     </div>
                     <div>
                         <span>Data finalização</span>
-                        <strong>13/08/2021 23:55</strong>
+                        <strong>{deliveryFormatted?.dataFinalizacao}</strong>
                     </div>
                     <div>
-                        <select className="primary-extra-light" name="" id="">
-                        <option value="">Pendente</option>
-                        <option value="">Finalizada</option>
-                        <option value="">Cancelada</option>
+                        <span>Status</span>
+                        <select 
+                            value={deliveryFormatted?.status} 
+                            defaultValue={'PENDENTE'} 
+                            className={`${deliveryFormatted?.status.toLowerCase()}`}
+                            onChange={handleChangeStatusDelivery}
+                        >
+                            <option value="PENDENTE">Pendente</option>
+                            <option value="FINALIZADO">Finalizado</option>
+                            <option value="CANCELADO">Cancelado</option>
                         </select>
                     </div>
                 </div>
@@ -66,42 +147,42 @@ export function DetalhesEntrega() {
                             <div className="box-separator">
                                 <div className="input-group">
                                     <span>Nome</span>
-                                    <p>José de Assis atualizado</p>
+                                    <p>{deliveryFormatted?.cliente.nome}</p>
                                 </div>
-                                <div className="inline">
+                                {/* <div className="inline">
                                     <div className="input-group">
                                         <span>Email</span>
-                                        <p>jeseassis@email.com</p>
+                                        <p>{deliveryFormatted?.cliente.email}</p>
                                     </div>
                                     <div className="input-group">
                                         <span>Telefone</span>
-                                        <p>(73) 98178-7390</p>
+                                        <p>{deliveryFormatted?.cliente.telefone}</p>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="endereco">
                                     <div className="separator">
                                         <h3>Endereço</h3>
                                     </div>
                                     <div className="input-group">
                                         <span>Nome</span>
-                                        <p>José de Assis atualizado</p>
+                                        <p>{deliveryFormatted?.cliente.nome}</p>
                                     </div>
                                     <div className="input-group">
                                         <span>Logradouro</span>
-                                        <p>Rua Padre Vicente Santename</p>
+                                        <p>{deliveryFormatted?.destinatario.logradouro}</p>
                                     </div>
                                     <div className="inline">
                                         <div className="input-group">
                                             <span>Número</span>
-                                            <p>S/N</p>
+                                            <p>{deliveryFormatted?.destinatario.numero}</p>
                                         </div>
                                         <div className="input-group">
                                             <span>Complemento</span>
-                                            <p>Casa</p>
+                                            <p>{deliveryFormatted?.destinatario.complemento}</p>
                                         </div>
                                         <div className="input-group">
                                             <span>Bairro</span>
-                                            <p>Centro</p>
+                                            <p>{deliveryFormatted?.destinatario.bairro}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -124,18 +205,17 @@ export function DetalhesEntrega() {
                             </button>
                         </div>
                         <ul>
-                            <li className="danger">
-                                <strong>Tentativa de entrega sem sucesso</strong>
-                                <span>15/08/2021 13:35</span>
-                            </li>
-                            <li className="danger">
-                                <strong>Tentativa de entrega sem sucesso</strong>
-                                <span>15/08/2021 13:35</span>
-                            </li>
-                            <li className="primary-light">
+                            {occurrences.map(occurrence => (
+                                <li className="danger" key={occurrence.id}>
+                                    <strong>{occurrence.descricao}</strong>
+                                    <span>{occurrence.dataRegistro}</span>
+                                </li>
+
+                            ))}
+                            {/* <li className="primary-light">
                                 <strong>Entrege com sucesso</strong>
                                 <span>15/08/2021 13:35</span>
-                            </li>
+                            </li> */}
                         </ul>
                     </section>
                 </div>
@@ -143,6 +223,8 @@ export function DetalhesEntrega() {
                 <NewOccurrenceModal
                     isOpen={isNewOccurrenceModalOpen}
                     onRequestClose={handleCloseNewOccurrenceModal}
+                    entregaId={id}
+                    onLoadOccurrences={loadOcorrencias}
                 />
             </Content>
         </Container>

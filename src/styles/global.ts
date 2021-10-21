@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
     :root {
         /*Colors HUE*/
-        --hue: 128;
+        --hue: 202;
         
         --hue-danger: 358;
         --hue-status-pedido-pendente: 209;
@@ -45,7 +45,7 @@ export const GlobalStyle = createGlobalStyle`
 
         /*FINALIZADO*/
         --status-pedido-finalizado: hsla(var(--hue-status-pedido-finalizado), 44%, 44%, 1);
-        --status-pedido-finalizado-light: hsla(var(--hue), 44%, 44%, 0.2);
+        --status-pedido-finalizado-light: hsla(var(--hue-status-pedido-finalizado), 44%, 44%, 0.2);
     }
 
     * {
@@ -84,7 +84,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     [disabled] {
-        opacity: 0.6;
+        opacity: 0.5;
         cursor: not-allowed;
     }
 
@@ -269,6 +269,7 @@ export const GlobalStyle = createGlobalStyle`
         margin-top: 2.5rem;
 
         .client-list__item {
+            cursor: pointer;
             padding-bottom: 1.5rem;
             display: flex;
             align-items: center;
