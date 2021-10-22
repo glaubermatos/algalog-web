@@ -4,9 +4,9 @@ import styled from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
     :root {
         /*Colors HUE*/
-        --hue: 202;
+        --hue: 203;
         
-        --hue-danger: 358;
+        --hue-status-pedido-cancelado: 358;
         --hue-status-pedido-pendente: 209;
         --hue-status-pedido-finalizado: 128;
         /*===================================*/
@@ -17,9 +17,8 @@ export const GlobalStyle = createGlobalStyle`
         --primary-color: hsla(var(--hue), 44%, 44%, 1);
         --primary-color-light: hsla(var(--hue), 39%, 54%, 1);
         --primary-color-extra-light: hsla(var(--hue), 33%, 96%, 1);
-
-        --sidebar-width: 5.625rem;
-
+        --danger-color: hsla(var(--hue-status-pedido-cancelado), 55%, 52%, 1);
+        
         --input-border-color: hsla(var(--hue), 12%, 80%, 1);
         --input-border-color-focus: hsla(var(--hue), 22%, 60%, 1);
         
@@ -30,24 +29,27 @@ export const GlobalStyle = createGlobalStyle`
         --gray-300: hsla(var(--hue), 80%, 0%, 0.3);
         --gray-200: hsla(var(--hue), 80%, 0%, 0.2);
         --gray-100: hsla(var(--hue), 80%, 0%, 0.1);
-
+        
         --box-shadow-color: hsla(var(--hue), 49%, 34%, 0.05);
         
         /*Status dos Pedidos*/
-        --danger-color: hsla(var(--hue-danger), 62%, 50%, 1);
         /*PENDENTE*/
         --status-pedido-pendente: hsla(var(--hue-status-pedido-pendente), 55%, 52%, 1);
         --status-pedido-pendente-light: hsla(var(--hue-status-pedido-pendente), 55%, 52%, 0.2 );
-
+        
         /*CANCELADO*/
-        --status-pedido-cancelado: var(--danger-color);
-        --status-pedido-cancelado-light: hsla(var(--hue-danger), 62%, 50%, 0.2);
-
+        --status-pedido-cancelado: hsla(var(--hue-status-pedido-cancelado), 62%, 50%, 1);
+        --status-pedido-cancelado-light: hsla(var(--hue-status-pedido-cancelado), 62%, 50%, 0.2);
+        
         /*FINALIZADO*/
         --status-pedido-finalizado: hsla(var(--hue-status-pedido-finalizado), 44%, 44%, 1);
         --status-pedido-finalizado-light: hsla(var(--hue-status-pedido-finalizado), 44%, 44%, 0.2);
+        
+        
+        --sidebar-width: 5.625rem;
+        --compenents-form-height: 3rem
     }
-
+    
     * {
         padding: 0;
         margin: 0;
@@ -83,6 +85,11 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
+    input,
+    button {
+        height: var(--compenents-form-height);
+    }
+
     [disabled] {
         opacity: 0.5;
         cursor: not-allowed;
@@ -111,8 +118,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .button {
-        height: 3rem; /*48px*/
-        padding: 0 1.5rem;
+        padding: 0 1rem;
         text-transform: uppercase;
         letter-spacing: 0.07875rem; /*1.26px = 9%*/
         font: 600 0.9375rem "Inter", sans-serif; /*14px*/
@@ -135,6 +141,11 @@ export const GlobalStyle = createGlobalStyle`
         &.default {
             background: var(--body-color);
             color: var(--primary-color-light);
+        }
+
+        &.danger {
+            background: var(--danger-color);
+            color: var(--background-color);
         }
 
         svg {
@@ -162,6 +173,8 @@ export const GlobalStyle = createGlobalStyle`
             }
 
             label {
+                font: 400 0.9375rem 'Inter', sans-serif;
+                line-height: 1.171875rem;
                 color: var(--gray-500);
                 margin-bottom: 0.5rem;
             }
@@ -194,7 +207,7 @@ export const GlobalStyle = createGlobalStyle`
 
             input, textarea {
                 font: 400 1rem 'Inter', sans-serif;
-                padding: 0.75rem 1rem 0.75rem 1rem;
+                padding: 0 1rem;
                 border-radius: 0.5rem;
                 border: 1.5px solid var(--input-border-color);
                 background: var(--background-color);

@@ -1,17 +1,23 @@
 import { useHistory } from 'react-router-dom'
 import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
 
+import { ALModal } from '../components/ALModal';
+
 import { api } from '../services/api';
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/clientes";
 import { useEffect, useState } from 'react';
 import { Customer } from '../types';
+import { toast } from 'react-toastify';
 
 export function Clientes() {
     const history = useHistory()
 
     const [customers, setCustomers] = useState<Customer[]>([])
     const [customersAmount, setCustomersAmount] = useState(0)
+    const [customerToDelete, setCustomerToDelete] = useState<Customer>({} as Customer)
+
+    const [isDeleteCustomerModalOpen, setIsDeleteCustomerModalOpen] = useState(false)
 
     useEffect(() => {
         api.get<Customer[]>('/clientes')
@@ -21,6 +27,32 @@ export function Clientes() {
                 setCustomersAmount(clientes.length)
             })
     }, [])
+
+    function handleOpenDeleteCustomerModal(customer: Customer) {
+        setIsDeleteCustomerModalOpen(true)
+        setCustomerToDelete(customer)
+    }
+
+    function handleCloseDeleteCustomerModal() {
+        setIsDeleteCustomerModalOpen(false)
+    }
+
+    function handleDeleteCustomer(customerUpdated: Customer) {
+        api.delete(`/clientes/${customerUpdated.id}`)
+            .then(response => {
+                let customersUpdated = customers;
+                customersUpdated = customersUpdated.filter(customer => customer.id !== customerUpdated.id)
+                
+                setCustomers(customersUpdated)
+                setCustomersAmount(customersUpdated.length)
+                setCustomerToDelete({} as Customer)
+
+                toast.success('Cliente excluído')
+
+                handleCloseDeleteCustomerModal()
+            })
+            .catch(response => toast.error('Cliente não pode ser excluído'))
+    }
 
     return(
         <Container>
@@ -59,6 +91,7 @@ export function Clientes() {
 
                                     <button 
                                         type="button"
+                                        onClick={() => handleOpenDeleteCustomerModal(customer)}
                                     >
                                         <FiTrash2 size="1.25rem" color="#CF3034" />
                                     </button>
@@ -67,6 +100,24 @@ export function Clientes() {
                         ))}
                     </tbody>
                 </table>
+
+                <ALModal
+                    headerTitle="Excluir cliente" 
+                    isOpen={isDeleteCustomerModalOpen}
+                    onRequestClose={handleCloseDeleteCustomerModal}
+                >
+                    <Content>
+                        <div className="modal-delete-cliente">
+                            <FiTrash2 size="4rem" />
+                            <span>{customerToDelete.nome}</span>
+                            <p>Quer mesmo excluir esse cliente? Ele será removido pra sempre.</p>
+                            <div className="modal-actions">
+                                <button onClick={handleCloseDeleteCustomerModal} className="button default">Cancelar</button>
+                                <button onClick={() => handleDeleteCustomer(customerToDelete)} className="button danger">Excluir cliente</button>
+                            </div>
+                        </div>
+                    </Content>
+                </ALModal>
             </Content>
         </Container>
     );

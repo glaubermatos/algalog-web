@@ -226,6 +226,20 @@ createServer({
 
       return schema.db.clientes.insert(data)
     })
+
+    this.delete('/clientes/:id', (schema, request) => {
+      const id = request.params.id
+      const deliveries = schema.db.entregas
+      const deliveriesFiltered = deliveries.filter(delivery => delivery.cliente.id === id)
+
+      if(deliveriesFiltered.length > 0) {
+        return new Response(400, { some: 'header' }, { errors: [`O cliente não pode ser excluído`] })
+      }
+
+      schema.db.clientes.remove(id)
+
+      return new Response(204)
+    })
   }
 })
 

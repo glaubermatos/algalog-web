@@ -9,12 +9,16 @@ import { Icon } from '../components/Icon';
 export function Dashboard() {
   return (
     <Container>
-        <Header iconName="home" title="Dashboard" helpText="Início"/>
+        <Header
+          iconName="home"
+          title="Dashboard"
+          helpText="Início"
+        />
         <Content>
           <div className="card">
             <Link to="/deliveries">
               <div className="img-mask">
-                <Icon name="entregas" size={64} color="primary-light" />
+                <Icon strokeWidth="1" name="entregas" size={64} color="primary-light" />
               </div>
               <div className="card-info">
                 <h2 className="card-info-title ">Solicitações de entrega</h2>
@@ -26,7 +30,7 @@ export function Dashboard() {
           <div className="card">
             <Link to="/customers">
               <div className="img-mask">
-                <Icon name="clientes" size={64} color="primary-light" />
+                <Icon strokeWidth="1" name="clientes" size={64} color="primary-light" />
               </div>
               <div className="card-info">
                 <h2 className="card-info-title ">Clientes cadastrados</h2>

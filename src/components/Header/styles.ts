@@ -28,7 +28,7 @@ export const Container = styled.header`
 
         a,
         .link-button {
-            font: 500 0.75rem 'Inter', sans-serif;
+            font: 500 0.9375rem 'Inter', sans-serif;
             line-height: 1.09375rem;
             color: var(--gray-800);
             text-transform: uppercase;
@@ -43,6 +43,7 @@ export const Container = styled.header`
 
             &:hover {
                 opacity: 0.6;
+                text-decoration: underline;
             }
 
             svg, img {
