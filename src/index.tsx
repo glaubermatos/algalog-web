@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { App}  from './App';
 
 import { belongsTo, createServer, hasMany, JSONAPISerializer, Model, Response } from 'miragejs'
+import { Customer } from './types';
 // import { ModelDefinition } from 'miragejs/-types';
 // import Schema from 'miragejs/orm/schema';
 
@@ -193,8 +194,6 @@ createServer({
     this.get('/entregas/:id/ocorrencias', (schema, request) => {
       let entrega = schema.db.entregas.find(request.params.id)
       const ocorrencias = schema.db.ocorrencias.filter(ocorrencia => ocorrencia.entregaId === entrega.id)
-    
-      console.log(ocorrencias)
 
       return ocorrencias
     })
@@ -208,13 +207,18 @@ createServer({
         entregaId: request.params.id
       }
 
-      console.log(newOcorrencia)
-      
       return schema.db.ocorrencias.insert(newOcorrencia)
     })
 
-    this.get('/clientes', () => {
-      return this.schema.db.clientes
+    this.get('/clientes', (schema, request) => {
+      const customers: Customer[] = schema.db.clientes
+
+      if (!request.queryParams.nome) {
+        return customers
+      }
+      
+      const searchByNome = request.queryParams.nome
+      return customers.filter(customer => customer.nome.toLowerCase().includes(searchByNome.toLowerCase()))
     })
 
     this.post('/clientes', (schema, request) => {

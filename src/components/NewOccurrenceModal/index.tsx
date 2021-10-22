@@ -14,21 +14,20 @@ export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, e
 
     const [descricao, setDescricao] = useState('')
 
-    function handleSubmit(event: FormEvent) {
+    async function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
         const data = {
             descricao
         }
 
-        api.post(`/entregas/${entregaId}/ocorrencias`, data)
-            .then(response => {
-                console.log(response.data)
-                toast.success('Ocorrência adicionada ao pedido')
-                onLoadOccurrences()
-                onRequestClose()
-            })
+        const response = await api.post(`/entregas/${entregaId}/ocorrencias`, data)
 
+        if(response.status === 201) {
+            toast.success('Ocorrência adicionada ao pedido')
+            onLoadOccurrences()
+            onRequestClose()
+        }
     }
 
     return(
