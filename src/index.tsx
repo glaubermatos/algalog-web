@@ -181,6 +181,15 @@ createServer({
       return new Response(204)
     })
 
+    this.put('/entregas/:id/cancelamento', (schema, request) => {
+      const id = request.params.id
+      
+      schema.db.entregas
+        .update(id, {status: 'CANCELADO', dataFinalizacao: null})
+
+      return new Response(204)
+    })
+
     this.get('/entregas/:id/ocorrencias', (schema, request) => {
       let entrega = schema.db.entregas.find(request.params.id)
       const ocorrencias = schema.db.ocorrencias.filter(ocorrencia => ocorrencia.entregaId === entrega.id)

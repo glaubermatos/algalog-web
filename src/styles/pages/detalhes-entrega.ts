@@ -139,7 +139,7 @@ export const Content = styled(PageContent)`
                         margin-top: 0.5rem;
                     }
 
-                    &.primary-light {
+                    &.finalizado {
                         background: none; /*reset class original*/
                         color: none; /*reset class original*/
                         box-shadow: none; /*reset class original*/

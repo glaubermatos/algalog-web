@@ -25,6 +25,7 @@ export function App() {
       <ToastContainer
         theme="light"
         position="top-right" 
+        autoClose={3000}
       />
       <BrowserRouter>
         <SideBar />

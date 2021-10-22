@@ -25,8 +25,8 @@ export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, e
             .then(response => {
                 console.log(response.data)
                 toast.success('Ocorrência adicionada ao pedido')
-                onRequestClose()
                 onLoadOccurrences()
+                onRequestClose()
             })
 
     }

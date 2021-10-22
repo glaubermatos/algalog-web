@@ -39,7 +39,7 @@ export function DetalhesEntrega() {
 
     const [deliveryFormatted, setDeliveryFormatted] = useState<DeliveryFormatted>()
     const [occurrences, setOccurrences] = useState<Occurrence[]>([])
-    const [reload, setReload] = useState(false)
+    const [statusChanged, setStatusChanged] = useState('')
 
     useEffect(() => {
         api.get<Delivery>(`/entregas/${Number(id)}`)
@@ -61,9 +61,9 @@ export function DetalhesEntrega() {
                     dataRegistro: formatDateTime(new Date(occurrence.dataRegistro))
                 }))
                 setOccurrences(occurrences)
-            })   
+            })  
 
-    }, [id, reload])
+    }, [id, statusChanged])
 
     async function handleChangeStatusDelivery(event: ChangeEvent<HTMLSelectElement>) {
         const status = event.target.value
@@ -71,8 +71,14 @@ export function DetalhesEntrega() {
         if(status === 'FINALIZADO') {
             const response = await api.put(`/entregas/${id}/finalizacao`)
             if (response.status === 204) {
-                setReload(true)
+                setStatusChanged('FINALIZADO')
                 toast.success(`Pedido de Entrega Nº ${id} finalizado`)
+            }
+        } else if (status === 'CANCELADO') {
+            const response = await api.put(`/entregas/${id}/cancelamento`)
+            if (response.status === 204) {
+                setStatusChanged('CANCELADO')
+                toast.success(`Pedido de Entrega Nº ${id} cancelado`)
             }
         }
     }
@@ -127,6 +133,7 @@ export function DetalhesEntrega() {
                     <div>
                         <span>Status</span>
                         <select 
+                            disabled={deliveryFormatted?.status !== 'PENDENTE'}
                             value={deliveryFormatted?.status} 
                             defaultValue={'PENDENTE'} 
                             className={`${deliveryFormatted?.status.toLowerCase()}`}
@@ -192,10 +199,13 @@ export function DetalhesEntrega() {
                     <section className="ocorrencias">
                         <div className="separator">
                             <h3>Ocorrências</h3>
-                            <span className="ocorrencias-total">3 ocorrências</span>
+                            <span className="ocorrencias-total">
+                                {`${occurrences.length} ${occurrences.length > 1 ? 'ocorrências' : 'ocorrência'}`}
+                            </span>
                         </div>
                         <div className="actions">
                             <button
+                                disabled={deliveryFormatted?.status !== 'PENDENTE'}
                                 id="btnNovaOcorrencia"
                                 className="button primary-light"
                                 onClick={handleOpenNewOccurrenceModal}
@@ -212,10 +222,14 @@ export function DetalhesEntrega() {
                                 </li>
 
                             ))}
-                            {/* <li className="primary-light">
-                                <strong>Entrege com sucesso</strong>
-                                <span>15/08/2021 13:35</span>
-                            </li> */}
+
+                            {deliveryFormatted?.status === 'FINALIZADO' ? (
+                                <li className="finalizado">
+                                    <strong>Entrega finalizada</strong>
+                                    <span>{deliveryFormatted?.dataFinalizacao}</span>
+                                </li>
+
+                            ) : (<></>)}
                         </ul>
                     </section>
                 </div>

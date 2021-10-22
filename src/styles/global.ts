@@ -123,7 +123,7 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
         transition: filter 0.3s;
 
-        &:hover {
+        &:hover:not(:disabled) {
             filter: brightness(0.9);
         }
 
