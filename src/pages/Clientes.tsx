@@ -83,17 +83,17 @@ export function Clientes() {
                                 <td>{ customer.email }</td>
                                 <td>{ customer.telefone }</td>
                                 <td>
-                                    <button 
+                                    <button
                                         type="button"
                                     >
-                                        <FiEdit2 size="1.25rem" color="#5CB768" />
+                                        <FiEdit2 className="edit" size={19} />
                                     </button>
 
                                     <button 
                                         type="button"
                                         onClick={() => handleOpenDeleteCustomerModal(customer)}
                                     >
-                                        <FiTrash2 size="1.25rem" color="#CF3034" />
+                                        <FiTrash2 className="trash" size={19} />
                                     </button>
                                 </td>
                             </tr>

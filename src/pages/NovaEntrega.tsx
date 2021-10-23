@@ -74,8 +74,8 @@ export function NovaEntrega() {
                 title="Nova solicitação de entrega"
                 helpText="Preencha o formulário abaixo para solicitar nova entrega"
             >
-                <Link to="/deliveries">
-                    <FiArrowLeft size={19} color="#0C1D0E" />
+                <Link to="/deliveries" className="link-button">
+                    <FiArrowLeft size={19} />
                     Voltar
                 </Link>
             </Header>

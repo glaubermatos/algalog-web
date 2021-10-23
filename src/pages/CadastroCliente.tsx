@@ -37,8 +37,8 @@ export function CadastroCliente() {
                 title="Novo cliente"
                 helpText="Preencha o formulário abaixo para cadastrar um novo cliente"
             >
-                <Link to="/customers">
-                    <FaArrowLeft size={14} color="#0C1D0E"/>
+                <Link to="/customers" className="link-button">
+                    <FaArrowLeft size={14}/>
                     Voltar
                 </Link>
             </Header>

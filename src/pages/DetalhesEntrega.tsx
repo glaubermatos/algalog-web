@@ -111,7 +111,7 @@ export function DetalhesEntrega() {
                 title="Detalhes da entrega"
                 helpText={`Entrega Nº ${id}`}
             >
-                <Link to="/deliveries">
+                <Link to="/deliveries" className="link-button">
                     <FaArrowLeft size={14} color="#0C1D0E" />
                     Voltar
                 </Link>

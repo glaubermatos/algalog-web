@@ -139,18 +139,13 @@ export const Content = styled(PageContent)`
                         margin-top: 0.5rem;
                     }
 
-                    &.finalizado {
-                        background: none; /*reset class original*/
-                        color: none; /*reset class original*/
-                        box-shadow: none; /*reset class original*/
-                        border: 1px solid var(--status-pedido-finalizado);
+                    &.finalizado {                        
+                        border: 1px solid var(--status-pedido-finalizado-light);
                         border-left: 0.375rem solid var(--status-pedido-finalizado);
                     }
 
-                    &.danger {
-                        background: none; /*reset class original*/
-                        color: none; /*reset class original*/
-                        border: 1px solid var(--danger-color);
+                    &.danger {                        
+                        border: 1px solid var(--status-pedido-cancelado-light);
                         border-left: 0.375rem solid var(--danger-color);
                     }
 

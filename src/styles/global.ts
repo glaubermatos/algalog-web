@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
     :root {
         /*Colors HUE*/
-        --hue: 203;
+        --hue: 216;
         
         --hue-status-pedido-cancelado: 358;
         --hue-status-pedido-pendente: 209;
@@ -96,24 +96,29 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .link-button {
-        height: 3rem; /*48px*/
+        font: 500 0.9375rem 'Inter', sans-serif;
+        line-height: 1.09375rem;
+        color: var(--gray-800);
         text-transform: uppercase;
-        letter-spacing: 0.07875rem; /*1.26px = 9%*/
-        font: 600 0.75rem "Inter", sans-serif; /*14px*/
+        text-decoration: none;
+        letter-spacing: 0.07875rem;
+        height: 2rem;
 
         background: none;
 
         display: flex;
-        justify-content: center;
         align-items: center;
-        transition: filter 0.3s;
+
+        transition: opacity 0.2s;
 
         &:hover {
-            filter: brightness(0.9);
+            opacity: 0.6;
+            text-decoration: underline;
         }
 
         svg {
-            margin-right: 1rem;
+            stroke: var(--gray-800);
+            margin-right: 0.75rem;
         }
     }
 
@@ -226,6 +231,11 @@ export const GlobalStyle = createGlobalStyle`
                     border: 1.5px solid var(--input-border-color-focus);
                     box-shadow: 2px 3px 4px var(--gray-100);
                 }
+            }
+
+            textarea {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
             }
         }
 

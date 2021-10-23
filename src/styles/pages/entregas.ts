@@ -15,9 +15,10 @@ export const Content = styled(PageContent)`
 
         box-shadow: 0px 4px 20px var(--box-shadow-color);
         border: 1px solid transparent;
+        border-left: 4px solid transparent;
 
         &:hover {
-            border: 1px solid var(--primary-color-light);
+            border-color: var(--primary-color-light);
             background: linear-gradient(
                 95deg,
                 var(--primary-color-light) -220%,
