@@ -5,8 +5,6 @@ interface IconSvgProps {
 }
 
 export const IconSvg = styled.svg<IconSvgProps>`
-    /* width: 64px;
-    height: 64px; */
 
     & path {
         stroke: ${(props) => {

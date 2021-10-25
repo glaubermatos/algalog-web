@@ -11,6 +11,7 @@ import { SearchCustomerModal } from "../components/SearchCustomerModal";
 
 import { Container, Content } from "../styles/pages/nova-entrega";
 import { toast } from "react-toastify";
+import { Button } from "../shared/Button";
 
 export function NovaEntrega() {
     const history = useHistory()
@@ -65,6 +66,10 @@ export function NovaEntrega() {
 
     function handleCloseSearchCustomerModal() {
         setIsSearchCustomerModalOpen(false)
+    }
+
+    function handleCancelRegistration() {
+        history.push('/deliveries')
     }
 
     return(
@@ -165,16 +170,18 @@ export function NovaEntrega() {
                         </div>
                     </div>
                     <div className="form-actions">
-                        <button className="button primary-light" type="submit">
+                        <Button
+                            type="submit"
+                            color="primary"
+                        >
                             Solicitar entrega
-                        </button>
-                        <button 
-                            type="button" 
-                            className="button default"
-                            onClick={() => history.push('/deliveries')}
+                        </Button>
+                        <Button
+                            type="button"
+                            onClick={handleCancelRegistration}
                         >
                             Cancelar
-                        </button>
+                        </Button>
                     </div>
               </form>
               <SearchCustomerModal

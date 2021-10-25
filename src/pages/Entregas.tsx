@@ -8,6 +8,7 @@ import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/entregas";
 import { api } from '../services/api';
 import { formatDateTime, formatPrice } from '../utils/format';
+import { Button } from '../shared/Button';
 
 export function Entregas() {
     const history = useHistory()
@@ -23,6 +24,10 @@ export function Entregas() {
             })
     }, [])
 
+    function handleLinkToCreateNewDelivery() {
+        history.push('deliveries/new')
+    }
+
     return(
         <Container>
             <Header 
@@ -30,10 +35,14 @@ export function Entregas() {
                 title="Solicitações de entrega"
                 helpText={`${deliveriesAmount} ${deliveriesAmount > 1 ? 'solicitações' : 'solicitação'}`}
             >
-                <button className="button primary-light" onClick={() => history.push('/deliveries/new')}>
+                <Button
+                    type="button"
+                    color="primary"
+                    onClick={handleLinkToCreateNewDelivery}
+                >
                     <FiPlus size={20} />
                     Nova solicitação
-                </button>
+                </Button>
             </Header>
             <Content>
                 {deliveries.map(delivery => (

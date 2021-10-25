@@ -7,6 +7,7 @@ import { Container, Content } from "../styles/pages/cadastro-cliente";
 import { api } from "../services/api";
 import { Customer } from "../types";
 import { toast } from "react-toastify";
+import { Button } from "../shared/Button";
 
 interface ResponseCustomer {
     cliente: Customer
@@ -28,6 +29,10 @@ export function CadastroCliente() {
             toast.success(`Cliente cadastrado com sucesso!`)
             history.push('/customers')
         }
+    }
+
+    function handleCancelRegistration() {
+        history.push('/customers')
     }
 
     return(
@@ -80,16 +85,18 @@ export function CadastroCliente() {
                         </div>
                     </div>
                     <div className="form-actions">
-                        <button className="button primary-light" type="submit">
-                            Cadastrar
-                        </button>
-                        <button 
+                        <Button
+                            type="submit"
+                            color="primary"
+                        >
+                            Salvar
+                        </Button>
+                        <Button
                             type="button"
-                            className="button default"
-                            onClick={() => history.push('/customers')}
-                         >
+                            onClick={handleCancelRegistration}
+                        >
                             Cancelar
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </Content>

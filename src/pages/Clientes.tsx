@@ -1,14 +1,17 @@
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
-
-import { ALModal } from '../components/ALModal';
+import { toast } from 'react-toastify';
 
 import { api } from '../services/api';
+
+import { Button } from '../shared/Button';
 import { Header } from "../components/Header";
-import { Container, Content } from "../styles/pages/clientes";
-import { useEffect, useState } from 'react';
+import { ALModal } from '../components/ALModal';
+
 import { Customer } from '../types';
-import { toast } from 'react-toastify';
+
+import { Container, Content } from "../styles/pages/clientes";
 
 export function Clientes() {
     const history = useHistory()
@@ -54,6 +57,10 @@ export function Clientes() {
             .catch(response => toast.error('Cliente não pode ser excluído'))
     }
 
+    function handleLinkToCreateNewCustomer() {
+        history.push('customers/new')
+    }
+
     return(
         <Container>
             <Header 
@@ -61,10 +68,14 @@ export function Clientes() {
                 title="Clientes" 
                 helpText={`${customersAmount} ${customersAmount > 1 ? 'clientes cadastrados' : 'cliente cadastrado'}`}
             >
-                <button className="button primary-light" onClick={() => history.push('/customers/new')}>
+                <Button
+                    color="primary"
+                    type="button"
+                    onClick={handleLinkToCreateNewCustomer}
+                >
                     <FiPlus size={19} />
                     Novo cliente
-                </button>
+                </Button>
             </Header>
             <Content>
                 <table>
@@ -83,9 +94,7 @@ export function Clientes() {
                                 <td>{ customer.email }</td>
                                 <td>{ customer.telefone }</td>
                                 <td>
-                                    <button
-                                        type="button"
-                                    >
+                                    <button type="button">
                                         <FiEdit2 className="edit" size={19} />
                                     </button>
 
