@@ -37,6 +37,7 @@ export function App() {
                 <Route path="/deliveries/new" component={NovaEntrega} />
                 <Route path="/deliveries/:id" component={DetalhesEntrega} />
                 <Route path="/customers" exact component={Clientes} />
+                <Route path="/customers/:id" component={CadastroCliente} />
                 <Route path="/customers/new" component={CadastroCliente} />
               </Switch>
           </Content>

@@ -133,7 +133,7 @@ export const GlobalStyle = createGlobalStyle`
             margin: 2rem 0 1.5rem 0;
         }
 
-        .form-group {
+        /* .form-group {
             display: flex;
             flex-direction: column;
 
@@ -201,7 +201,7 @@ export const GlobalStyle = createGlobalStyle`
                 padding-top: 0.75rem;
                 padding-bottom: 0.75rem;
             }
-        }
+        } */
 
         .form-actions {
             margin-top: 2.5rem;

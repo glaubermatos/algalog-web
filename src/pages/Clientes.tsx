@@ -61,6 +61,10 @@ export function Clientes() {
         history.push('customers/new')
     }
 
+    function handleLinkToEditCustomer(customerId: number) {
+        history.push(`/customers/${customerId}`)
+    }
+
     return(
         <Container>
             <Header 
@@ -94,7 +98,10 @@ export function Clientes() {
                                 <td>{ customer.email }</td>
                                 <td>{ customer.telefone }</td>
                                 <td>
-                                    <button type="button">
+                                    <button
+                                        type="button"
+                                        onClick={() => handleLinkToEditCustomer(customer.id)}
+                                    >
                                         <FiEdit2 className="edit" size={19} />
                                     </button>
 

@@ -5,6 +5,12 @@ export interface Customer {
     telefone: string;
 }
 
+export interface CustomerInput {
+    nome: string;
+    email: string;
+    telefone: string;
+}
+
 export interface Delivery {
     id: number,
     cliente: {

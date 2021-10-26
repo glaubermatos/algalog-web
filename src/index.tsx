@@ -134,7 +134,7 @@ createServer({
   },
 
   routes() {
-    this.timing = 1000
+    this.timing = 750
     this.namespace = 'api'
 
     this.get('/entregas', (schema) => {
@@ -221,10 +221,25 @@ createServer({
       return customers.filter(customer => customer.nome.toLowerCase().includes(searchByNome.toLowerCase()))
     })
 
+    this.get('/clientes/:id', (schema, request) => {
+      const id = request.params.id
+      return schema.db.clientes.find(id)
+    })
+
     this.post('/clientes', (schema, request) => {
       const data = JSON.parse(request.requestBody)
 
       return schema.db.clientes.insert(data)
+    })
+
+    this.put('/clientes/:id', (schema, request) => {
+      const id = request.params.id
+      const data = JSON.parse(request.requestBody)
+      
+      schema.db.clientes
+        .update(id, {id, ...data})
+
+      return new Response(204)
     })
 
     this.delete('/clientes/:id', (schema, request) => {
