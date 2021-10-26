@@ -5,10 +5,11 @@ import { Link, useHistory } from 'react-router-dom'
 import { Delivery } from '../types';
 
 import { Header } from "../components/Header";
-import { Container, Content } from "../styles/pages/entregas";
 import { api } from '../services/api';
 import { formatDateTime, formatPrice } from '../utils/format';
 import { Button } from '../shared/Button';
+
+import { Container, Content } from "../styles/pages/entregas";
 
 export function Entregas() {
     const history = useHistory()
@@ -19,7 +20,7 @@ export function Entregas() {
     useEffect(() => {
         api.get<Delivery[]>('/entregas')
             .then(response => {
-                setDeliveries(response.data)
+                setDeliveries(response.data.sort((a, b) => a.dataPedido > b.dataPedido ? -1 : 1))
                 setDeliveriesAmount(response.data.length)
             })
     }, [])

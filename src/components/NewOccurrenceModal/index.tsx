@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
+import { Button } from "../../shared/Button";
+import { Textarea } from "../../shared/Textarea";
 import { ALModal } from "../ALModal";
 
 interface NewOccurrenceProps {
@@ -37,20 +39,20 @@ export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, e
             headerTitle="Adicionar ocorrência"
         >
             <form onSubmit={handleSubmit} style={{marginTop: '3rem'}}>
-                <div className="form-group">
-                    <label htmlFor="descricao">Descrição</label>
-                    <textarea
-                        id="descricao"
-                        name="descricao"
-                        rows={3}
-                        onChange={(event) => setDescricao(event.target.value)}
-                        placeholder="Descreva o problema enfrentado com esta entrega"
-                    />
-                </div>
+                <Textarea
+                    label="Descrição"
+                    name="descricao"
+                    rows={3}
+                    onChange={(event) => setDescricao(event.target.value)}
+                    placeholder="Descreva o problema enfrentado com esta entrega"
+                />
                 <div className="form-actions">
-                    <button type="submit" className="button primary-light">
+                    <Button
+                        color="primary"
+                        type="submit"
+                    >
                         Registrar nova ocorrência
-                    </button>
+                    </Button>
                 </div>
             </form>
         </ALModal>

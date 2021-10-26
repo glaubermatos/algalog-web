@@ -24,8 +24,9 @@ export function App() {
       <GlobalStyle />
       <ToastContainer
         theme="light"
-        position="top-right" 
+        position="top-center" 
         autoClose={3000}
+        hideProgressBar
       />
       <BrowserRouter>
         <SideBar />

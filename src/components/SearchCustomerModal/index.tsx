@@ -1,9 +1,12 @@
-import { ALModal } from "../ALModal"
-
-import { FiChevronRight } from 'react-icons/fi'
 import { ChangeEvent, useState } from "react"
-import { Customer } from "../../types"
+import { FiChevronRight } from 'react-icons/fi'
+
 import { api } from "../../services/api"
+
+import { ALModal } from "../ALModal"
+import { Customer } from "../../types"
+
+import { Input } from "../../shared/Input"
 
 interface SearchCustomerModalProps {
     isOpen: boolean;
@@ -42,16 +45,12 @@ export function SearchCustomerModal({isOpen, onRequestClose, onCustomerSelected 
             headerTitle="Pesquisar cliente"
         >
             <form style={{marginTop: '3rem'}} autoComplete="off">
-                <div className="form-group">
-                    <label htmlFor="nomeCliente">Cliente</label>
-                    <input
-                        type="text"
-                        id="nomeCliente"
-                        name="nome"
-                        placeholder="Digite o nome do cliente para pesquisar"
-                        onChange={handleSearchCustomer}
-                    />
-                </div>
+                <Input
+                    label="Cliente"
+                    name="nome"
+                    placeholder="Pesquisar cliente por nome"
+                    onChange={handleSearchCustomer}
+                />
             </form>
             <div className="client-list">
                 {customersFiltered.map(customer => (

@@ -10,7 +10,7 @@ export const Content = styled(PageContent)`
 
     .card {
         background: var(--background-color);
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         padding: 2rem 2rem 2rem 1.5rem;
         border: 1px solid transparent;
         box-shadow: 0px 4px 20px var(--box-shadow-color);

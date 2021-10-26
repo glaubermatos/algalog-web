@@ -128,8 +128,18 @@ export function Clientes() {
                             <span>{customerToDelete.nome}</span>
                             <p>Quer mesmo excluir esse cliente? Ele será removido pra sempre.</p>
                             <div className="modal-actions">
-                                <button onClick={handleCloseDeleteCustomerModal} className="button default">Cancelar</button>
-                                <button onClick={() => handleDeleteCustomer(customerToDelete)} className="button danger">Excluir cliente</button>
+                                <Button
+                                    style={{color: 'var(--danger-color)'}}
+                                    onClick={handleCloseDeleteCustomerModal}
+                                >
+                                    Cancelar
+                                </Button>
+                                <Button
+                                    color="danger"
+                                    onClick={() => handleDeleteCustomer(customerToDelete)}
+                                >
+                                    Excluir cliente
+                                </Button>
                             </div>
                         </div>
                     </Content>

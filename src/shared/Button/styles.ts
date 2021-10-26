@@ -28,7 +28,12 @@ export const Container = styled.button<ButtonProps>`
                     background: var(--primary-color-light);
                     color: var(--background-color);
                 `
-        
+            case 'danger':
+                return css`
+                    background: var(--danger-color);
+                    color: var(--background-color);
+                `
+
             default:
                 return css`
                     background: var(--body-color);

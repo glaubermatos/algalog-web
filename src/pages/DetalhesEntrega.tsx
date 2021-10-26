@@ -9,6 +9,7 @@ import { api } from "../services/api";
 import { Delivery, Occurrence } from "../types";
 import { formatDateTime, formatPrice } from "../utils/format";
 import { toast } from "react-toastify";
+import { Button } from "../shared/Button";
 
 interface DetalhesEntregaParams {
     id: string
@@ -157,14 +158,7 @@ export function DetalhesEntrega() {
                                     <p>{deliveryFormatted?.cliente.nome}</p>
                                 </div>
                                 {/* <div className="inline">
-                                    <div className="input-group">
-                                        <span>Email</span>
-                                        <p>{deliveryFormatted?.cliente.email}</p>
-                                    </div>
-                                    <div className="input-group">
-                                        <span>Telefone</span>
-                                        <p>{deliveryFormatted?.cliente.telefone}</p>
-                                    </div>
+                                    
                                 </div> */}
                                 <div className="endereco">
                                     <div className="separator">
@@ -204,15 +198,15 @@ export function DetalhesEntrega() {
                             </span>
                         </div>
                         <div className="actions">
-                            <button
-                                disabled={deliveryFormatted?.status !== 'PENDENTE'}
-                                id="btnNovaOcorrencia"
-                                className="button primary-light"
+                            <Button
+                                type="button"
+                                color="primary"
                                 onClick={handleOpenNewOccurrenceModal}
+                                disabled={deliveryFormatted?.status !== 'PENDENTE'}
                             >
                                 <FaPlus size={14} />
                                 Nova ocorrência
-                            </button>
+                            </Button>
                         </div>
                         <ul>
                             {occurrences.map(occurrence => (
@@ -229,7 +223,7 @@ export function DetalhesEntrega() {
                                     <span>{deliveryFormatted?.dataFinalizacao}</span>
                                 </li>
 
-                            ) : (<></>)}
+                            ) : null}
                         </ul>
                     </section>
                 </div>

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Container } from "./styles";
+import { FormGroup } from "../../styles/global";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: string;
@@ -14,7 +14,7 @@ export function Input({label, addOn, ...rest}: InputProps) {
     }
 
     return(
-        <Container className="form-group">
+        <FormGroup className="form-group">
             <label htmlFor={formatLabel()}>{label}</label>
             {addOn ? (
                 <div className="input-group">
@@ -32,6 +32,6 @@ export function Input({label, addOn, ...rest}: InputProps) {
                     {...rest}
                 />
             )}
-        </Container>
+        </FormGroup>
     );
 }

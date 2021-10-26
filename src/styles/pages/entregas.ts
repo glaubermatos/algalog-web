@@ -11,7 +11,7 @@ export const Content = styled(PageContent)`
     .card {
         width: 100%;
         background: var(--background-color);
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
 
         box-shadow: 0px 4px 20px var(--box-shadow-color);
         border: 1px solid transparent;
@@ -65,7 +65,7 @@ export const Content = styled(PageContent)`
             }
 
             .status {
-                padding: 0.25rem 1rem;
+                padding: 0.25rem 0.75rem;
                 border-radius: 0.5rem;
                 font: 700 0.75rem "Inter", sans-serif;
                 letter-spacing: 0.07875rem; /*9%*/

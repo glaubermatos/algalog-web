@@ -74,60 +74,60 @@ createServer({
         }
       ],
       entregas: [
-        // {
-        //   id: 1,
-        //   cliente: {
-        //     id: 1,
-        //     nome: 'Glauber de Oliveira Matos'
-        //   },
-        //   destinatario: {
-        //     nome: 'Glauber',
-	      //     logradouro: 'Rua Governador Valdir Pires',
-	      //     numero: 'S/Nº',
-	      //     complemento: 'Casa',
-	      //     bairro: 'Centro'
-        //   },
-        //   taxa: 15,
-        //   status: 'CANCELADO',
-        //   dataPedido: new Date(),
-        //   dataFinalizacao: null
-        // },
-        // {
-        //   id: 2,
-        //   cliente: {
-        //     id: 1,
-        //     nome: 'Glauber de Oliveira Matos'
-        //   },
-        //   destinatario: {
-        //     nome: 'Glauber',
-	      //     logradouro: 'Rua Governador Valdir Pires',
-	      //     numero: 'S/Nº',
-	      //     complemento: 'Casa',
-	      //     bairro: 'Centro'
-        //   },
-        //   taxa: 25,
-        //   status: 'PENDENTE',
-        //   dataPedido: new Date(),
-        //   dataFinalizacao: null
-        // },
-        // {
-        //   id: 3,
-        //   cliente: {
-        //     id: 1,
-        //     nome: 'Glauber de Oliveira Matos'
-        //   },
-        //   destinatario: {
-        //     nome: 'Glauber',
-	      //     logradouro: 'Rua Governador Valdir Pires',
-	      //     numero: 'S/Nº',
-	      //     complemento: 'Casa',
-	      //     bairro: 'Centro'
-        //   },
-        //   taxa: 10,
-        //   status: 'FINALIZADO',
-        //   dataPedido: new Date(),
-        //   dataFinalizacao: new Date()
-        // }
+        {
+          id: 1,
+          cliente: {
+            id: 1,
+            nome: 'Glauber de Oliveira Matos'
+          },
+          destinatario: {
+            nome: 'Glauber',
+	          logradouro: 'Rua Governador Valdir Pires',
+	          numero: 'S/Nº',
+	          complemento: 'Casa',
+	          bairro: 'Centro'
+          },
+          taxa: 15,
+          status: 'CANCELADO',
+          dataPedido: new Date(),
+          dataFinalizacao: null
+        },
+        {
+          id: 2,
+          cliente: {
+            id: 1,
+            nome: 'Glauber de Oliveira Matos'
+          },
+          destinatario: {
+            nome: 'Glauber',
+	          logradouro: 'Rua Governador Valdir Pires',
+	          numero: 'S/Nº',
+	          complemento: 'Casa',
+	          bairro: 'Centro'
+          },
+          taxa: 25,
+          status: 'PENDENTE',
+          dataPedido: new Date(),
+          dataFinalizacao: null
+        },
+        {
+          id: 3,
+          cliente: {
+            id: 1,
+            nome: 'Glauber de Oliveira Matos'
+          },
+          destinatario: {
+            nome: 'Glauber',
+	          logradouro: 'Rua Governador Valdir Pires',
+	          numero: 'S/Nº',
+	          complemento: 'Casa',
+	          bairro: 'Centro'
+          },
+          taxa: 10,
+          status: 'FINALIZADO',
+          dataPedido: new Date(),
+          dataFinalizacao: new Date()
+        }
       ],
       ocorrencias: []
     })
