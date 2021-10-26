@@ -1,9 +1,12 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { api } from "../../services/api";
-import { Button } from "../../shared/Button";
-import { Textarea } from "../../shared/Textarea";
-import { ALModal } from "../ALModal";
+
+import { api } from "../../../services/api";
+
+import { Modal } from "../";
+
+import { Button } from "../../../shared/Button";
+import { Textarea } from "../../../shared/Textarea";
 
 interface NewOccurrenceProps {
     isOpen: boolean;
@@ -33,7 +36,7 @@ export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, e
     }
 
     return(
-        <ALModal
+        <Modal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             headerTitle="Adicionar ocorrência"
@@ -55,6 +58,6 @@ export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, e
                     </Button>
                 </div>
             </form>
-        </ALModal>
+        </Modal>
     )
 }

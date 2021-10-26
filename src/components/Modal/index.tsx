@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
+import ReactModal from 'react-modal'
 import { FiX } from 'react-icons/fi'
-import Modal from 'react-modal'
+
 import { Header } from '../Header'
 
 interface ALModalProps {
@@ -10,12 +11,12 @@ interface ALModalProps {
     children: ReactNode;
 }
 
-Modal.setAppElement('#root')
+ReactModal.setAppElement('#root')
 
-export function ALModal( { isOpen, onRequestClose, headerTitle, children }: ALModalProps) {
+export function Modal( { isOpen, onRequestClose, headerTitle, children }: ALModalProps) {
 
     return(
-        <Modal
+        <ReactModal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             overlayClassName="react-modal-overlay"
@@ -28,6 +29,6 @@ export function ALModal( { isOpen, onRequestClose, headerTitle, children }: ALMo
                 </button>
             </Header>
             { children }
-        </Modal>
+        </ReactModal>
     )
 }

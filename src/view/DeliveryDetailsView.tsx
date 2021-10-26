@@ -4,7 +4,7 @@ import { FaArrowLeft, FaPlus } from "react-icons/fa";
 import { Header } from "../components/Header";
 import { Container, Content } from "../styles/pages/detalhes-entrega";
 import { ChangeEvent, useEffect, useState } from "react";
-import { NewOccurrenceModal } from "../components/NewOccurrenceModal";
+import { NewOccurrenceModal } from "../components/Modal/NewOccurrenceModal";
 import { api } from "../services/api";
 import { Delivery, Occurrence } from "../types";
 import { formatDateTime, formatPrice } from "../utils/format";

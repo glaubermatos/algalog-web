@@ -1,12 +1,12 @@
 import { ChangeEvent, useState } from "react"
 import { FiChevronRight } from 'react-icons/fi'
 
-import { api } from "../../services/api"
+import { api } from "../../../services/api"
 
-import { ALModal } from "../ALModal"
-import { Customer } from "../../types"
+import { Modal } from "../"
+import { Customer } from "../../../types"
 
-import { Input } from "../../shared/Input"
+import { Input } from "../../../shared/Input"
 
 interface SearchCustomerModalProps {
     isOpen: boolean;
@@ -39,7 +39,7 @@ export function SearchCustomerModal({isOpen, onRequestClose, onCustomerSelected 
     }
 
     return(
-        <ALModal
+        <Modal
             isOpen={isOpen}
             onRequestClose={handleCloseModal}
             headerTitle="Pesquisar cliente"
@@ -67,6 +67,6 @@ export function SearchCustomerModal({isOpen, onRequestClose, onCustomerSelected 
                     </div>
                 ))}
             </div>
-        </ALModal>
+        </Modal>
     )
 }

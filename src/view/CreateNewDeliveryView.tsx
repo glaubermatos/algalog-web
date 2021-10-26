@@ -7,7 +7,7 @@ import { api } from "../services/api";
 import { Delivery } from '../types'
 
 import { Header } from "../components/Header";
-import { SearchCustomerModal } from "../components/SearchCustomerModal";
+import { SearchCustomerModal } from "../components/Modal/SearchCustomerModal";
 
 import { Container, Content } from "../styles/pages/nova-entrega";
 import { toast } from "react-toastify";

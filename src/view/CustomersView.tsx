@@ -7,11 +7,11 @@ import { api } from '../services/api';
 
 import { Button } from '../shared/Button';
 import { Header } from "../components/Header";
-import { ALModal } from '../components/ALModal';
 
 import { Customer } from '../types';
 
 import { Container, Content } from "../styles/pages/clientes";
+import { DeleteCustomerModal } from '../components/Modal/DeleteCustomerModal';
 
 export function Clientes() {
     const history = useHistory()
@@ -31,13 +31,14 @@ export function Clientes() {
             })
     }, [])
 
-    function handleOpenDeleteCustomerModal(customer: Customer) {
+    function handleOpenDeleteCustomerModal(customerToDelete: Customer) {
         setIsDeleteCustomerModalOpen(true)
-        setCustomerToDelete(customer)
+        setCustomerToDelete(customerToDelete)
     }
 
     function handleCloseDeleteCustomerModal() {
         setIsDeleteCustomerModalOpen(false)
+        setCustomerToDelete({} as Customer)
     }
 
     function handleDeleteCustomer(customerUpdated: Customer) {
@@ -54,7 +55,7 @@ export function Clientes() {
 
                 handleCloseDeleteCustomerModal()
             })
-            .catch(response => toast.error('Cliente não pode ser excluído'))
+            .catch(response => toast.error('Existe entregas para esse cliente. Não pode ser excluído'))
     }
 
     function handleLinkToCreateNewCustomer() {
@@ -117,33 +118,13 @@ export function Clientes() {
                     </tbody>
                 </table>
 
-                <ALModal
-                    headerTitle="Excluir cliente" 
-                    isOpen={isDeleteCustomerModalOpen}
+                <DeleteCustomerModal
+                    isDeleteCustomerModalOpen={isDeleteCustomerModalOpen}
                     onRequestClose={handleCloseDeleteCustomerModal}
-                >
-                    <Content>
-                        <div className="modal-delete-cliente">
-                            <FiTrash2 size="4rem" />
-                            <span>{customerToDelete.nome}</span>
-                            <p>Quer mesmo excluir esse cliente? Ele será removido pra sempre.</p>
-                            <div className="modal-actions">
-                                <Button
-                                    style={{color: 'var(--danger-color)'}}
-                                    onClick={handleCloseDeleteCustomerModal}
-                                >
-                                    Cancelar
-                                </Button>
-                                <Button
-                                    color="danger"
-                                    onClick={() => handleDeleteCustomer(customerToDelete)}
-                                >
-                                    Excluir cliente
-                                </Button>
-                            </div>
-                        </div>
-                    </Content>
-                </ALModal>
+                    onDeleteCustomer={() => handleDeleteCustomer(customerToDelete)}
+                    customerToDelete={customerToDelete}
+                />
+
             </Content>
         </Container>
     );
