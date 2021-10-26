@@ -10,7 +10,7 @@ import { Header } from "../components/Header";
 
 import { Customer } from '../types';
 
-import { Container, Content } from "../styles/pages/clientes";
+import { Container, Content } from "../styles/view/customers";
 import { DeleteCustomerModal } from '../components/Modal/DeleteCustomerModal';
 
 export function Clientes() {

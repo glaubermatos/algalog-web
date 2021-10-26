@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { Header } from '../components/Header';
-import { Container, Content } from '../styles/pages/dashboard'
+import { Container, Content } from '../styles/view/dashboard'
 
 import arrowRightImg from '../assets/images/arrow-right.svg'
 import { Icon } from '../components/Icon';

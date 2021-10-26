@@ -9,7 +9,7 @@ import { api } from '../services/api';
 import { formatDateTime, formatPrice } from '../utils/format';
 import { Button } from '../shared/Button';
 
-import { Container, Content } from "../styles/pages/entregas";
+import { Container, Content } from "../styles/view/deliveries";
 
 export function Entregas() {
     const history = useHistory()

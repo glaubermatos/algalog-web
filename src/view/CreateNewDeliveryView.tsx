@@ -9,7 +9,7 @@ import { Delivery } from '../types'
 import { Header } from "../components/Header";
 import { SearchCustomerModal } from "../components/Modal/SearchCustomerModal";
 
-import { Container, Content } from "../styles/pages/nova-entrega";
+import { Container, Content } from "../styles/view/create-new-delivery";
 import { toast } from "react-toastify";
 import { Button } from "../shared/Button";
 import { Input } from "../shared/Input";

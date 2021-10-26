@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { FaArrowLeft } from 'react-icons/fa'
 
 import { Header } from "../components/Header";
-import { Container, Content } from "../styles/pages/cadastro-cliente";
+import { Container, Content } from "../styles/view/registration-customer";
 import { api } from "../services/api";
 import { Customer, CustomerInput } from "../types";
 import { toast } from "react-toastify";
