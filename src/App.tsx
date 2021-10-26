@@ -5,17 +5,17 @@ import { ToastContainer } from 'react-toastify';
 import { Content } from "./components/Content";
 import { MainContainer } from "./components/MainContainer";
 import { SideBar } from "./components/SideBar";
-import { GlobalStyle } from "./styles/global";
 
-import { Dashboard } from "./pages/Dashboard";
-import { Clientes } from "./pages/Clientes";
-import { CadastroCliente } from './pages/CadastroCliente';
-import { Entregas } from './pages/Entregas';
-import { NovaEntrega } from './pages/NovaEntrega';
-import { DetalhesEntrega } from './pages/DetalhesEntrega';
+import { Dashboard } from "./view/DashboardView";
+import { Clientes } from "./view/CustomersView";
+import { CadastroCliente } from './view/RegistrationCustomerView';
+import { Entregas } from './view/DeliveriesView';
+import { NovaEntrega } from './view/CreateNewDeliveryView';
+import { DetalhesEntrega } from './view/DeliveryDetailsView';
 
 import 'react-toastify/dist/ReactToastify.min.css'
 
+import { GlobalStyle } from "./styles/global";
 
 export function App() {
 
