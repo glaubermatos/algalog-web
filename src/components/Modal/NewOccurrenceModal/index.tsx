@@ -12,7 +12,7 @@ interface NewOccurrenceProps {
     isOpen: boolean;
     onRequestClose: () => void;
     onLoadOccurrences: () => void;
-    entregaId: string;
+    entregaId: number;
 }
 
 export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, entregaId}: NewOccurrenceProps) {

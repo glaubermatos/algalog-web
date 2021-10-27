@@ -1,29 +1,22 @@
-import { useEffect, useState } from 'react';
-import { FiPlus } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom'
+import { FiPlus } from 'react-icons/fi';
 
-import { Delivery } from '../types';
+import { formatDateTime, formatPrice } from '../utils/format';
+
+import { useDeliveries } from '../hooks/useDeliveries';
 
 import { Header } from "../components/Header";
-import { api } from '../services/api';
-import { formatDateTime, formatPrice } from '../utils/format';
 import { Button } from '../shared/Button';
 
-import { Container, Content } from "../styles/view/deliveries";
+import { Container, Content, DeliveriesContainer } from "../styles/view/deliveries";
 
 export function Entregas() {
     const history = useHistory()
 
-    const [deliveries, setDeliveries] = useState<Delivery[]>([])
-    const [deliveriesAmount, setDeliveriesAmount] = useState(0)
+    const { deliveries } = useDeliveries()
 
-    useEffect(() => {
-        api.get<Delivery[]>('/entregas')
-            .then(response => {
-                setDeliveries(response.data.sort((a, b) => a.dataPedido > b.dataPedido ? -1 : 1))
-                setDeliveriesAmount(response.data.length)
-            })
-    }, [])
+    const deliveriesAmount = deliveries.length
+    const deliveriesSorted = deliveries.sort((a, b) => a.dataPedido > b.dataPedido ? -1 : 1)
 
     function handleLinkToCreateNewDelivery() {
         history.push('deliveries/new')
@@ -46,29 +39,42 @@ export function Entregas() {
                 </Button>
             </Header>
             <Content>
-                {deliveries.map(delivery => (
-                    <div key={delivery.id} className="card">
-                        <Link to={`/deliveries/${delivery.id}`}>
-                            <div className="header">
-                                <div>
-                                    <span>Data do pedido</span>
-                                    <strong>{formatDateTime(new Date(delivery.dataPedido))}</strong>
+                {/* <div className="tool-bar">
+                    <Button>
+                        Pendentes
+                    </Button>
+                    <Button>
+                        Finalizados
+                    </Button>
+                    <Button>
+                        Cancelados
+                    </Button>
+                </div> */}
+                <DeliveriesContainer>
+                    {deliveriesSorted.map(delivery => (
+                        <div key={delivery.id} className="card">
+                            <Link to={`/deliveries/${delivery.id}`}>
+                                <div className="header">
+                                    <div>
+                                        <span>Data do pedido</span>
+                                        <strong>{formatDateTime(new Date(delivery.dataPedido))}</strong>
+                                    </div>
+                                    <label className={`status ${delivery.status.toLowerCase()}`}>{delivery.status}</label>
                                 </div>
-                                <label className={`status ${delivery.status.toLowerCase()}`}>{delivery.status}</label>
-                            </div>
-                            <div className="body">
-                                <div className="cliente">
-                                    <label>Cliente</label>
-                                    <p>{delivery.cliente.nome}</p>
+                                <div className="body">
+                                    <div className="cliente">
+                                        <label>Cliente</label>
+                                        <p>{delivery.cliente.nome}</p>
+                                    </div>
+                                    <div className="taxa">
+                                        <label>Taxa de entrega</label>
+                                        <strong>{formatPrice(delivery.taxa)}</strong>
+                                    </div>
                                 </div>
-                                <div className="taxa">
-                                    <label>Taxa de entrega</label>
-                                    <strong>{formatPrice(delivery.taxa)}</strong>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
-                ))}
+                            </Link>
+                        </div>
+                    ))}
+                </DeliveriesContainer>
             </Content>
         </Container>
     )

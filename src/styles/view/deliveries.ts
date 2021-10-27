@@ -4,9 +4,18 @@ import { PageContent } from "../global";
 export const Container = styled.div``
 
 export const Content = styled(PageContent)`
+    /* .tool-bar {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 1rem;
+    } */
+`
+
+export const DeliveriesContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    margin-bottom: 2rem;
 
     .card {
         width: 100%;

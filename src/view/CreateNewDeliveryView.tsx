@@ -2,9 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
 
-import { api } from "../services/api";
-
-import { Delivery } from '../types'
+import { DeliveryInput } from '../types'
 
 import { Header } from "../components/Header";
 import { SearchCustomerModal } from "../components/Modal/SearchCustomerModal";
@@ -13,25 +11,16 @@ import { Container, Content } from "../styles/view/create-new-delivery";
 import { toast } from "react-toastify";
 import { Button } from "../shared/Button";
 import { Input } from "../shared/Input";
-
-interface InitialFormState {
-    cliente: {
-        id: number
-    },
-    destinatario: {
-        nome: string,
-        logradouro: string,
-        numero: string,
-        complemento: string,
-        bairro: string,
-    },
-    taxa: number
-}
+import { useDeliveries } from "../hooks/useDeliveries";
 
 export function NovaEntrega() {
-    const history = useHistory()
 
-    const [form, setForm] = useState<InitialFormState>({
+    const history = useHistory()
+    const { createDelivery } = useDeliveries()
+    
+    const [isSearchCustomerModalOpen, setIsSearchCustomerModalOpen] = useState(false)
+
+    const initialFormState: DeliveryInput = {
         cliente: {
             id: 0
         },
@@ -43,18 +32,18 @@ export function NovaEntrega() {
             bairro: '',
         },
         taxa: 0
-    })
+    }
 
-    const [isSearchCustomerModalOpen, setIsSearchCustomerModalOpen] = useState(false)
+    const [form, setForm] = useState<DeliveryInput>(initialFormState)
+
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
         try {
-            const response = await api.post<Delivery>('/entregas', form)
-            const delivery = response.data
+            createDelivery(form)
             
-            toast.success(`Entrega Nº ${delivery.id} emitida com sucesso!`)
+            toast.success(`Entrega emitida com sucesso!`)
             history.push('/deliveries')
         } catch(error) {
             console.log(error)

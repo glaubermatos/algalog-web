@@ -10,6 +10,7 @@ import { Delivery, Occurrence } from "../types";
 import { formatDateTime, formatPrice } from "../utils/format";
 import { toast } from "react-toastify";
 import { Button } from "../shared/Button";
+import { useDeliveries } from "../hooks/useDeliveries";
 
 interface DetalhesEntregaParams {
     id: string
@@ -36,14 +37,17 @@ interface DeliveryFormatted {
 }
 
 export function DetalhesEntrega() {
-    const { id } = useParams<DetalhesEntregaParams>()
+    const params = useParams<DetalhesEntregaParams>()
+    const id = Number(params.id)
+
+    const { changeStatus } = useDeliveries()
 
     const [deliveryFormatted, setDeliveryFormatted] = useState<DeliveryFormatted>()
     const [occurrences, setOccurrences] = useState<Occurrence[]>([])
     const [statusChanged, setStatusChanged] = useState('')
 
     useEffect(() => {
-        api.get<Delivery>(`/entregas/${Number(id)}`)
+        api.get<Delivery>(`/entregas/${id}`)
             .then(response => {
                 const delivery = response.data
 
@@ -69,19 +73,24 @@ export function DetalhesEntrega() {
     async function handleChangeStatusDelivery(event: ChangeEvent<HTMLSelectElement>) {
         const status = event.target.value
 
-        if(status === 'FINALIZADO') {
-            const response = await api.put(`/entregas/${id}/finalizacao`)
-            if (response.status === 204) {
-                setStatusChanged('FINALIZADO')
-                toast.success(`Pedido de Entrega Nº ${id} finalizado`)
-            }
-        } else if (status === 'CANCELADO') {
-            const response = await api.put(`/entregas/${id}/cancelamento`)
-            if (response.status === 204) {
-                setStatusChanged('CANCELADO')
-                toast.success(`Pedido de Entrega Nº ${id} cancelado`)
-            }
-        }
+        await changeStatus(id, status.toUpperCase())
+
+        setStatusChanged(status.toUpperCase())
+        toast.success(`Entrega Nº ${id} ${status.toLowerCase()}`)
+
+        // if(status === 'FINALIZADO') {
+        //     const response = await api.put(`/entregas/${id}/finalizacao`)
+        //     if (response.status === 204) {
+        //         setStatusChanged('FINALIZADO')
+        //         toast.success(`Pedido de Entrega Nº ${id} finalizado`)
+        //     }
+        // } else if (status === 'CANCELADO') {
+        //     const response = await api.put(`/entregas/${id}/cancelamento`)
+        //     if (response.status === 204) {
+        //         setStatusChanged('CANCELADO')
+        //         toast.success(`Pedido de Entrega Nº ${id} cancelado`)
+        //     }
+        // }
     }
 
     function loadOcorrencias() {
