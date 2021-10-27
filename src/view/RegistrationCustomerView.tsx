@@ -1,14 +1,17 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { FaArrowLeft } from 'react-icons/fa'
 
+import { useCustomers } from "../hooks/useCustomers";
+
+import { Customer } from "../types";
+
 import { Header } from "../components/Header";
-import { Container, Content } from "../styles/view/registration-customer";
-import { api } from "../services/api";
-import { Customer, CustomerInput } from "../types";
-import { toast } from "react-toastify";
 import { Button } from "../shared/Button";
 import { Input } from "../shared/Input";
+
+import { Container, Content } from "../styles/view/registration-customer";
 
 interface InitialFormState {
     id?: number;
@@ -22,6 +25,8 @@ interface CadastroClienteParams {
 }
 
 export function CadastroCliente() {
+
+    const { createCustomer, updateCustomer, showCustomer } = useCustomers()
     
     const history = useHistory()
 
@@ -34,16 +39,15 @@ export function CadastroCliente() {
         telefone: ''
     })
 
-    useEffect(() => {        
-        async function getCustomer() {
-            const response = await api.get<Customer>(`/clientes/${id}`)
-            setForm(response.data)
+    useEffect(() => {
+        function getCustomer() {
+            if(isUpdate) {
+                showCustomer(Number(id))
+                    .then(customer => setForm(customer))
+            }
         }
 
-        if(isUpdate) {
-            getCustomer()
-        }
-
+        getCustomer()
     }, [id, isUpdate])
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -59,32 +63,32 @@ export function CadastroCliente() {
         event.preventDefault()
 
         form.id
-            ? updateCustomer(form)
-            : createCustomer(form)
+            ? onUpdateCustomer(form as Customer)
+            : onCreateNewCustomer(form)
     }
 
-    function createCustomer(customer: InitialFormState) {
-        api.post<CustomerInput>('/clientes', customer)
-            .then(response => {
-                toast.success(`Cliente cadastrado com sucesso`)
-                history.push('/customers')
-            })
-            .catch(response => {
-                console.log(response.data)
-                toast.error('Não foi possível salvar os dados do cliente')
-            })
+    function onCreateNewCustomer(customer: InitialFormState) {
+        try {
+            createCustomer(customer)
+
+            toast.success(`Cliente cadastrado com sucesso`)
+            history.push('/customers')
+        } catch(error) {
+            console.log(error)
+            toast.error('Não foi possível salvar os dados do cliente')
+        }
     }
 
-    function updateCustomer(customer: InitialFormState) {
-        api.put<Customer>(`/clientes/${id}`, customer)
-            .then(response => {
-                toast.success('Dados do cliente atualizados')
-                history.push('/customers')
-            })
-            .catch(response => {
-                console.log(response)
-                toast.error('Não foi possível atualizar os dados do cliente')
-            })
+    function onUpdateCustomer(customer: Customer) {
+        try {
+            updateCustomer(customer)
+            
+            toast.success('Dados do cliente atualizados')
+            history.push('/customers')
+        } catch(error) {
+            console.log(error)
+            toast.error('Dados do cliente não atualizados')
+        }
     }
 
     function handleCancelRegistration() {

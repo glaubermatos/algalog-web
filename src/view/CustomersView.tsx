@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
 import { toast } from 'react-toastify';
-
-import { api } from '../services/api';
 
 import { Button } from '../shared/Button';
 import { Header } from "../components/Header";
@@ -12,24 +10,17 @@ import { Customer } from '../types';
 
 import { Container, Content } from "../styles/view/customers";
 import { DeleteCustomerModal } from '../components/Modal/DeleteCustomerModal';
+import { useCustomers } from '../hooks/useCustomers';
 
 export function Clientes() {
+    const { customers, deleteCustomer } = useCustomers()
+
     const history = useHistory()
 
-    const [customers, setCustomers] = useState<Customer[]>([])
-    const [customersAmount, setCustomersAmount] = useState(0)
+    const customersAmount = customers.length
     const [customerToDelete, setCustomerToDelete] = useState<Customer>({} as Customer)
 
     const [isDeleteCustomerModalOpen, setIsDeleteCustomerModalOpen] = useState(false)
-
-    useEffect(() => {
-        api.get<Customer[]>('/clientes')
-            .then(response => {
-                const clientes = response.data
-                setCustomers(clientes)
-                setCustomersAmount(clientes.length)
-            })
-    }, [])
 
     function handleOpenDeleteCustomerModal(customerToDelete: Customer) {
         setIsDeleteCustomerModalOpen(true)
@@ -41,28 +32,23 @@ export function Clientes() {
         setCustomerToDelete({} as Customer)
     }
 
-    function handleDeleteCustomer(customerUpdated: Customer) {
-        api.delete(`/clientes/${customerUpdated.id}`)
+    function handleDeleteCustomer(customer: Customer) {
+        deleteCustomer(customer.id)
             .then(response => {
-                let customersUpdated = customers;
-                customersUpdated = customersUpdated.filter(customer => customer.id !== customerUpdated.id)
-                
-                setCustomers(customersUpdated)
-                setCustomersAmount(customersUpdated.length)
-                setCustomerToDelete({} as Customer)
-
                 toast.success('Cliente excluído')
-
                 handleCloseDeleteCustomerModal()
             })
-            .catch(response => toast.error('Existe entregas para esse cliente. Não pode ser excluído'))
+            .catch(response => {
+                console.log(response)
+                toast.error('Existe entregas para esse cliente. Não pode ser excluído')
+            })
     }
 
-    function handleLinkToCreateNewCustomer() {
+    function goToCreateNewCustomer() {
         history.push('customers/new')
     }
 
-    function handleLinkToEditCustomer(customerId: number) {
+    function goToEditCustomer(customerId: number) {
         history.push(`/customers/${customerId}`)
     }
 
@@ -76,7 +62,7 @@ export function Clientes() {
                 <Button
                     color="primary"
                     type="button"
-                    onClick={handleLinkToCreateNewCustomer}
+                    onClick={goToCreateNewCustomer}
                 >
                     <FiPlus size={19} />
                     Novo cliente
@@ -101,7 +87,7 @@ export function Clientes() {
                                 <td>
                                     <button
                                         type="button"
-                                        onClick={() => handleLinkToEditCustomer(customer.id)}
+                                        onClick={() => goToEditCustomer(customer.id)}
                                     >
                                         <FiEdit2 className="edit" size={19} />
                                     </button>

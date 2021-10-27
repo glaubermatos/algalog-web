@@ -88,7 +88,7 @@ createServer({
 	          bairro: 'Centro'
           },
           taxa: 15,
-          status: 'CANCELADO',
+          status: 'PENDENTE',
           dataPedido: new Date(),
           dataFinalizacao: null
         },
@@ -106,9 +106,9 @@ createServer({
 	          bairro: 'Centro'
           },
           taxa: 25,
-          status: 'PENDENTE',
+          status: 'FINALIZADO',
           dataPedido: new Date(),
-          dataFinalizacao: null
+          dataFinalizacao: new Date()
         },
         {
           id: 3,
@@ -124,9 +124,9 @@ createServer({
 	          bairro: 'Centro'
           },
           taxa: 10,
-          status: 'FINALIZADO',
+          status: 'CANCELADO',
           dataPedido: new Date(),
-          dataFinalizacao: new Date()
+          dataFinalizacao: null
         }
       ],
       ocorrencias: []
@@ -236,10 +236,8 @@ createServer({
       const id = request.params.id
       const data = JSON.parse(request.requestBody)
       
-      schema.db.clientes
+      return schema.db.clientes
         .update(id, {id, ...data})
-
-      return new Response(204)
     })
 
     this.delete('/clientes/:id', (schema, request) => {

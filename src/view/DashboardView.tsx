@@ -6,10 +6,16 @@ import { Container, Content } from '../styles/view/dashboard'
 import arrowRightImg from '../assets/images/arrow-right.svg'
 import { Icon } from '../components/Icon';
 import { useDeliveries } from '../hooks/useDeliveries';
+import { useCustomers } from '../hooks/useCustomers';
 
 export function Dashboard() {
 
-  const {deliveries} = useDeliveries()
+  const { deliveries } = useDeliveries()
+  const { customers } = useCustomers()
+
+  const deliveriesAmount = deliveries.length
+  const customersAmount = customers.length
+
 
   return (
     <Container>
@@ -26,7 +32,7 @@ export function Dashboard() {
               </div>
               <div className="card-info">
                 <h2 className="card-info-title ">Solicitações de entrega</h2>
-                <strong>{deliveries.length}</strong>
+                <strong>{deliveriesAmount}</strong>
               </div>
               <img src={arrowRightImg} alt="arrow-right" />
             </Link>
@@ -38,7 +44,7 @@ export function Dashboard() {
               </div>
               <div className="card-info">
                 <h2 className="card-info-title ">Clientes cadastrados</h2>
-                <strong>128</strong>
+                <strong>{customersAmount}</strong>
               </div>
               <img src={arrowRightImg} alt="arrow-right" />
             </Link>
