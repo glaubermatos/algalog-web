@@ -7,6 +7,7 @@ import { Modal } from "../"
 import { Customer } from "../../../types"
 
 import { Input } from "../../../shared/Input"
+import { formatPhone } from "../../../utils/format"
 
 interface SearchCustomerModalProps {
     isOpen: boolean;
@@ -34,7 +35,11 @@ export function SearchCustomerModal({isOpen, onRequestClose, onCustomerSelected 
 
         if(searchBy.length > 2) {
             api.get<Customer[]>(`/clientes?nome=${searchBy}`)
-                .then(response => setCustomersFiltered(response.data))
+                .then(response => {
+                    const customers = response.data
+                    const customersFormatted = customers.map(customer => ({...customer, telefone: formatPhone(customer.telefone)}))
+                    setCustomersFiltered(customersFormatted)
+                })
         }
     }
 

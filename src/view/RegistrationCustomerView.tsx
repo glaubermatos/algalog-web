@@ -40,14 +40,17 @@ export function CadastroCliente() {
     })
 
     useEffect(() => {
-        function getCustomer() {
-            if(isUpdate) {
-                showCustomer(Number(id))
-                    .then(customer => setForm(customer))
+        if(isUpdate) {
+            showCustomer(Number(id))
+            .then(customer => {
+                const customerFormated = {
+                    ...customer, 
+                    telefone: customer.telefone.replace(/D/g,"")}
+                    setForm(customerFormated)
+                })
             }
-        }
-
-        getCustomer()
+            
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, isUpdate])
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -68,8 +71,10 @@ export function CadastroCliente() {
     }
 
     function onCreateNewCustomer(customer: InitialFormState) {
-        try {
-            createCustomer(customer)
+        try {            
+            const newCustomer = {...customer, telefone: handleFormatPhone()}
+
+            createCustomer(newCustomer)
 
             toast.success(`Cliente cadastrado com sucesso`)
             history.push('/customers')
@@ -80,8 +85,10 @@ export function CadastroCliente() {
     }
 
     function onUpdateCustomer(customer: Customer) {
-        try {
-            updateCustomer(customer)
+        try { 
+            const newCustomer = {...customer, telefone: handleFormatPhone()}
+
+            updateCustomer(newCustomer)
             
             toast.success('Dados do cliente atualizados')
             history.push('/customers')
@@ -93,6 +100,13 @@ export function CadastroCliente() {
 
     function handleCancelRegistration() {
         history.push('/customers')
+    }
+
+    function handleFormatPhone() {
+        const phone = form.telefone
+            .replace(/D/g, "")
+
+        return phone
     }
 
     const labelOfButtonSubmit = isUpdate ? 'Atualizar' : 'Salvar'
@@ -127,6 +141,8 @@ export function CadastroCliente() {
                             onChange={handleInputChange}
                         />
                         <Input
+                            type="tel"
+                            mask="(99) 99999-9999"
                             label="Telefone"
                             name="telefone"
                             value={form?.telefone}

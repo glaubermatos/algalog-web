@@ -64,7 +64,7 @@ createServer({
           id: 2,
           nome: 'Mariah Fátima Sueli Novaes',
           email: 'mariahfatimasuelinovaes@mrv.com.br',
-          telefone: '15985428107'
+          telefone: '1585428107'
         },
         {
           id: 3,

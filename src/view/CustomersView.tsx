@@ -11,9 +11,15 @@ import { Customer } from '../types';
 import { Container, Content } from "../styles/view/customers";
 import { DeleteCustomerModal } from '../components/Modal/DeleteCustomerModal';
 import { useCustomers } from '../hooks/useCustomers';
+import { formatPhone } from '../utils/format';
 
 export function Clientes() {
     const { customers, deleteCustomer } = useCustomers()
+
+    const customersFormated = customers.map(customer => ({
+        ...customer,
+        telefone: formatPhone(customer.telefone)
+    }))
 
     const history = useHistory()
 
@@ -79,7 +85,7 @@ export function Clientes() {
                         </tr>
                     </thead>
                     <tbody>
-                        {customers.map(customer => (
+                        {customersFormated.map(customer => (
                             <tr key={ customer.id} >
                                 <td>{ customer.nome }</td>
                                 <td>{ customer.email }</td>
