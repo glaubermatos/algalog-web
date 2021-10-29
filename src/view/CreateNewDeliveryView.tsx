@@ -15,7 +15,7 @@ import { Input } from "../shared/Input";
 
 import { Container, Content } from "../styles/view/create-new-delivery";
 
-export function NovaEntrega() {
+export function CreateNewDelivery() {
 
     const history = useHistory()
     const { createDelivery } = useDeliveries()

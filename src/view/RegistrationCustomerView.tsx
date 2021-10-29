@@ -24,7 +24,7 @@ interface CadastroClienteParams {
     id?: string;
 }
 
-export function CadastroCliente() {
+export function RegistrationCustomer() {
 
     const { createCustomer, updateCustomer, showCustomer } = useCustomers()
     

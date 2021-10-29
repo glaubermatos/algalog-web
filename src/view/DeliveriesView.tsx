@@ -10,7 +10,7 @@ import { Button } from '../shared/Button';
 
 import { Container, Content, DeliveriesContainer } from "../styles/view/deliveries";
 
-export function Entregas() {
+export function Deliveries() {
     const history = useHistory()
 
     const { deliveries } = useDeliveries()

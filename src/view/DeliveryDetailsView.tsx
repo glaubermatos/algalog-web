@@ -41,7 +41,7 @@ interface DeliveryFormatted {
     dataFinalizacao: string
 }
 
-export function DetalhesEntrega() {
+export function DeliveryDetails() {
     const params = useParams<DetalhesEntregaParams>()
     const id = Number(params.id)
 

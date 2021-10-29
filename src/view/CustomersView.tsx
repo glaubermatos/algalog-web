@@ -15,7 +15,7 @@ import { DeleteCustomerModal } from '../components/Modal/DeleteCustomerModal';
 
 import { Container, Content } from "../styles/view/customers";
 
-export function Clientes() {
+export function Customers() {
     const { customers, deleteCustomer } = useCustomers()
 
     const customersFormated = customers.map(customer => ({
