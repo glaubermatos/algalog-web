@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 
-import { Header } from '../components/Header';
-import { Container, Content } from '../styles/view/dashboard'
-
-import arrowRightImg from '../assets/images/arrow-right.svg'
-import { Icon } from '../components/Icon';
 import { useDeliveries } from '../hooks/useDeliveries';
 import { useCustomers } from '../hooks/useCustomers';
+
+import { Header } from '../components/Header';
+import { Icon } from '../components/Icon';
+
+import arrowRightImg from '../assets/images/arrow-right.svg'
+
+import { Container, Content } from '../styles/view/dashboard'
 
 export function Dashboard() {
 
@@ -31,7 +33,7 @@ export function Dashboard() {
                 <Icon strokeWidth="2" name="entregas" size={64} color="primary-light" />
               </div>
               <div className="card-info">
-                <h2 className="card-info-title ">Solicitações de entrega</h2>
+                <h2 className="card-info-title ">Entregas</h2>
                 <strong>{deliveriesAmount}</strong>
               </div>
               <img src={arrowRightImg} alt="arrow-right" />
@@ -43,7 +45,7 @@ export function Dashboard() {
                 <Icon strokeWidth="2" name="clientes" size={64} color="primary-light" />
               </div>
               <div className="card-info">
-                <h2 className="card-info-title ">Clientes cadastrados</h2>
+                <h2 className="card-info-title ">Clientes</h2>
                 <strong>{customersAmount}</strong>
               </div>
               <img src={arrowRightImg} alt="arrow-right" />

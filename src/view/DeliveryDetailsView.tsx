@@ -1,16 +1,21 @@
+import { ChangeEvent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { FaArrowLeft, FaPlus } from "react-icons/fa";
 
-import { Header } from "../components/Header";
-import { Container, Content } from "../styles/view/delivery-details";
-import { ChangeEvent, useEffect, useState } from "react";
-import { NewOccurrenceModal } from "../components/Modal/NewOccurrenceModal";
-import { api } from "../services/api";
-import { Delivery, Occurrence } from "../types";
-import { formatDateTime, formatPrice } from "../utils/format";
-import { toast } from "react-toastify";
-import { Button } from "../shared/Button";
 import { useDeliveries } from "../hooks/useDeliveries";
+
+import { api } from "../services/api";
+
+import { formatDateTime, formatPrice } from "../utils/format";
+
+import { Delivery, Occurrence } from "../types";
+
+import { Header } from "../components/Header";
+import { NewOccurrenceModal } from "../components/Modal/NewOccurrenceModal";
+import { Button } from "../shared/Button";
+
+import { Container, Content } from "../styles/view/delivery-details";
 
 interface DetalhesEntregaParams {
     id: string
@@ -58,39 +63,20 @@ export function DetalhesEntrega() {
                     dataFinalizacao: delivery.dataFinalizacao !== null ? formatDateTime(new Date(delivery.dataFinalizacao)) : '-'
                 })
             })
-            
-        api.get<Occurrence[]>(`/entregas/${id}/ocorrencias`)
-            .then(response => {
-                const occurrences = response.data.map(occurrence => ({
-                    ...occurrence,
-                    dataRegistro: formatDateTime(new Date(occurrence.dataRegistro))
-                }))
-                setOccurrences(occurrences)
-            })  
+        }, [id, statusChanged])
+        
+    useEffect(() => {
+        loadOcorrencias()  
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    }, [id, statusChanged])
-
-    async function handleChangeStatusDelivery(event: ChangeEvent<HTMLSelectElement>) {
+    function handleChangeStatusDelivery(event: ChangeEvent<HTMLSelectElement>) {
         const status = event.target.value
 
-        await changeStatus(id, status.toUpperCase())
+        changeStatus(id, status.toUpperCase())
 
         setStatusChanged(status.toUpperCase())
         toast.success(`Entrega Nº ${id} ${status.toLowerCase()}`)
-
-        // if(status === 'FINALIZADO') {
-        //     const response = await api.put(`/entregas/${id}/finalizacao`)
-        //     if (response.status === 204) {
-        //         setStatusChanged('FINALIZADO')
-        //         toast.success(`Pedido de Entrega Nº ${id} finalizado`)
-        //     }
-        // } else if (status === 'CANCELADO') {
-        //     const response = await api.put(`/entregas/${id}/cancelamento`)
-        //     if (response.status === 204) {
-        //         setStatusChanged('CANCELADO')
-        //         toast.success(`Pedido de Entrega Nº ${id} cancelado`)
-        //     }
-        // }
     }
 
     function loadOcorrencias() {

@@ -144,7 +144,7 @@ export function makeServer({ environment = 'test'}) {
                 {
                   id: 1,
                   nome: 'Glauber de Oliveira Matos',
-                  email: 'glauber@email.com',
+                  email: 'glaub.oliveira@hotmail.com',
                   telefone: '73981787390'
                 },
                 {
@@ -218,6 +218,6 @@ export function makeServer({ environment = 'test'}) {
               ],
               ocorrencias: []
             })
-          }
+        }
     })
 }

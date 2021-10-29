@@ -45,8 +45,10 @@ export function CadastroCliente() {
             .then(customer => {
                 const customerFormated = {
                     ...customer, 
-                    telefone: customer.telefone.replace(/D/g,"")}
-                    setForm(customerFormated)
+                    telefone: customer.telefone.replace(/D/g,"")
+                }
+                    
+                setForm(customerFormated)
                 })
             }
             

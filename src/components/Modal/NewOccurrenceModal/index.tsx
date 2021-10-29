@@ -19,20 +19,23 @@ export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, e
 
     const [descricao, setDescricao] = useState('')
 
-    async function handleSubmit(event: FormEvent) {
+    function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
         const data = {
             descricao
         }
 
-        const response = await api.post(`/entregas/${entregaId}/ocorrencias`, data)
-
-        if(response.status === 201) {
-            toast.success('Ocorrência adicionada ao pedido')
-            onLoadOccurrences()
-            onRequestClose()
-        }
+        api.post(`/entregas/${entregaId}/ocorrencias`, data)
+            .then(response => {
+                toast.success('Ocorrência adicionada ao pedido')
+                onLoadOccurrences()
+                onRequestClose()
+            })
+            .catch(response => {
+                console.log(response.data)
+                toast.error('Erro ao tentar salvar a ocorrência')
+            })
     }
 
     return(

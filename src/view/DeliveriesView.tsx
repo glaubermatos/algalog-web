@@ -26,7 +26,7 @@ export function Entregas() {
         <Container>
             <Header 
                 iconName="entregas"
-                title="Solicitações de entrega"
+                title="Entregas"
                 helpText={`${deliveriesAmount} ${deliveriesAmount > 1 ? 'solicitações' : 'solicitação'}`}
             >
                 <Button
@@ -35,21 +35,10 @@ export function Entregas() {
                     onClick={handleLinkToCreateNewDelivery}
                 >
                     <FiPlus size={20} />
-                    Nova solicitação
+                    Nova entrega
                 </Button>
             </Header>
             <Content>
-                {/* <div className="tool-bar">
-                    <Button>
-                        Pendentes
-                    </Button>
-                    <Button>
-                        Finalizados
-                    </Button>
-                    <Button>
-                        Cancelados
-                    </Button>
-                </div> */}
                 <DeliveriesContainer>
                     {deliveriesSorted.map(delivery => (
                         <div key={delivery.id} className="card">

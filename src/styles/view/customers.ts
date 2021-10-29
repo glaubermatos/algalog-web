@@ -13,7 +13,7 @@ export const Content = styled(PageContent)`
 
         thead tr th {
             padding: 0.5rem 2rem;
-            font: 700 0.75rem 'Nunito', sans-serif;
+            font: 700 0.875rem 'Nunito', sans-serif;
             text-transform: uppercase;
             line-height: 0.9375rem;
             color: var(--gray-500);

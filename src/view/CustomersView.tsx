@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
-import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
 import { toast } from 'react-toastify';
+import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
 
-import { Button } from '../shared/Button';
-import { Header } from "../components/Header";
+import { useCustomers } from '../hooks/useCustomers';
+
+import { formatPhone } from '../utils/format';
 
 import { Customer } from '../types';
 
-import { Container, Content } from "../styles/view/customers";
+import { Button } from '../shared/Button';
+import { Header } from "../components/Header";
 import { DeleteCustomerModal } from '../components/Modal/DeleteCustomerModal';
-import { useCustomers } from '../hooks/useCustomers';
-import { formatPhone } from '../utils/format';
+
+import { Container, Content } from "../styles/view/customers";
 
 export function Clientes() {
     const { customers, deleteCustomer } = useCustomers()

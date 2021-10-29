@@ -1,17 +1,19 @@
 import React, { FormEvent, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
+
+import { useDeliveries } from "../hooks/useDeliveries";
 
 import { DeliveryInput } from '../types'
 
 import { Header } from "../components/Header";
 import { SearchCustomerModal } from "../components/Modal/SearchCustomerModal";
 
-import { Container, Content } from "../styles/view/create-new-delivery";
-import { toast } from "react-toastify";
 import { Button } from "../shared/Button";
 import { Input } from "../shared/Input";
-import { useDeliveries } from "../hooks/useDeliveries";
+
+import { Container, Content } from "../styles/view/create-new-delivery";
 
 export function NovaEntrega() {
 
@@ -111,7 +113,7 @@ export function NovaEntrega() {
         <Container>
             <Header
                 iconName="entregas"
-                title="Nova solicitação de entrega"
+                title="Nova entrega"
                 helpText="Preencha o formulário abaixo para solicitar nova entrega"
             >
                 <Link to="/deliveries" className="link-button">
@@ -131,24 +133,6 @@ export function NovaEntrega() {
                         onClick={handleOpenSearchCustomerModal}
                         addOn={<FiSearch size={19} />}
                     />
-                    {/* <div className="form-group">
-                        <label htmlFor="cliente">Cliente</label>
-                        <div className="input-group">
-                            <span className="input-group-addon">
-                                <FiSearch size={18} color="#0C1D0E"/>
-                            </span>
-                            <input
-                                type="text"
-                                id="cliente"
-                                name="cliente"
-                                placeholder="Pesquisar cliente ..."
-                                readOnly
-                                onClick={handleOpenSearchCustomerModal}
-                                value={nomeDestinatario}
-                                onChange={(event) => setClienteId(Number(event.target.value))}
-                            />
-                        </div>
-                    </div> */}
                     <Input
                         type="number"
                         name="taxa"
@@ -158,24 +142,6 @@ export function NovaEntrega() {
                         onChange={handleInputChange}
                         addOn={"R$"}
                     />
-                    {/* <div className="form-group">
-                        <label htmlFor="taxa">Taxa de entrega</label>
-                        <div className="input-group">
-                            <span className="input-group-addon">
-                                R$
-                            </span>
-                            <input
-                                type="number"
-                                id="taxa"
-                                name="taxa"
-                                placeholder="Valor da taxa de entrega"
-                                value={taxa}
-                                onChange={(event) => {
-                                    setTaxa(Number(event.target.value))
-                                }}
-                            />
-                        </div>
-                    </div> */}
                     <h2>Endereço para entrega</h2>
                     <div className="form-inline">
                         <Input
