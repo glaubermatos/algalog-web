@@ -51,6 +51,11 @@ export const Content = styled(PageContent)`
                 color: var(--gray-500);
                 margin-bottom: 0.25rem;
             }
+
+            svg {
+                align-self: center;
+                stroke: var(--gray-300);
+            }
         }
     }
     

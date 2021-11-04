@@ -36,18 +36,18 @@ export function DeliveriesProvider({children}: DeliveriesProviderProps) {
     async function changeStatus(deliveryId: number, newStatus: string) {
         let deliveriesUpdate = [...deliveries]        
         let deliveryUpdated = deliveriesUpdate.find(delivery => Number(delivery.id) === Number(deliveryId))
-
+        
         if(deliveryUpdated) {
             switch (newStatus) {
-                case 'FINALIZADO':
+                case 'FINALIZADA':
                     await api.put(`/entregas/${deliveryId}/finalizacao`)
-                    deliveryUpdated.status = 'FINALIZADO'
+                    deliveryUpdated.status = 'FINALIZADA'
                     
                     break;
     
-                case 'CANCELADO':
+                case 'CANCELADA':
                     await api.put(`/entregas/${deliveryId}/cancelamento`)
-                    deliveryUpdated.status = 'CANCELADO'
+                    deliveryUpdated.status = 'CANCELADA'
     
                     break;
             
@@ -55,7 +55,6 @@ export function DeliveriesProvider({children}: DeliveriesProviderProps) {
                     break;
             }
         }
-
         setDeliveries(deliveriesUpdate)
     }
 

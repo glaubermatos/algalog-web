@@ -36,7 +36,7 @@ interface DeliveryFormatted {
     },
     taxa: number,
     taxaFormatada: string,
-    status: 'FINALIZADO' | 'PENDENTE' | 'CANCELADO',
+    status: 'FINALIZADA' | 'PENDENTE' | 'CANCELADA',
     dataPedido: string,
     dataFinalizacao: string
 }
@@ -70,13 +70,14 @@ export function DeliveryDetails() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    function handleChangeStatusDelivery(event: ChangeEvent<HTMLSelectElement>) {
+    async function handleChangeStatusDelivery(event: ChangeEvent<HTMLSelectElement>) {
         const status = event.target.value
 
-        changeStatus(id, status.toUpperCase())
+        await changeStatus(id, status.toUpperCase())
 
-        setStatusChanged(status.toUpperCase())
         toast.success(`Entrega Nº ${id} ${status.toLowerCase()}`)
+        
+        setStatusChanged(status)
     }
 
     function loadOcorrencias() {
@@ -136,8 +137,8 @@ export function DeliveryDetails() {
                             onChange={handleChangeStatusDelivery}
                         >
                             <option value="PENDENTE">Pendente</option>
-                            <option value="FINALIZADO">Finalizado</option>
-                            <option value="CANCELADO">Cancelado</option>
+                            <option value="FINALIZADA">Finalizada</option>
+                            <option value="CANCELADA">Cancelada</option>
                         </select>
                     </div>
                 </div>
@@ -212,7 +213,7 @@ export function DeliveryDetails() {
 
                             ))}
 
-                            {deliveryFormatted?.status === 'FINALIZADO' ? (
+                            {deliveryFormatted?.status === 'FINALIZADA' ? (
                                 <li className="finalizado">
                                     <strong>Entrega finalizada</strong>
                                     <span>{deliveryFormatted?.dataFinalizacao}</span>

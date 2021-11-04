@@ -25,7 +25,7 @@ export interface Delivery {
         bairro: string
     },
     taxa: number,
-    status: 'FINALIZADO' | 'PENDENTE' | 'CANCELADO',
+    status: 'FINALIZADA' | 'PENDENTE' | 'CANCELADA',
     dataPedido: string,
     dataFinalizacao: string
 }

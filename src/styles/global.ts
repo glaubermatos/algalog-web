@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
     :root {
         /*Colors HUE*/
-        --hue: 212;
+        --hue: 128;
         
         --hue-status-pedido-cancelado: 358;
         --hue-status-pedido-pendente: 209;
@@ -35,15 +35,15 @@ export const GlobalStyle = createGlobalStyle`
         /*Status dos Pedidos*/
         /*PENDENTE*/
         --status-pedido-pendente: hsla(var(--hue-status-pedido-pendente), 55%, 52%, 1);
-        --status-pedido-pendente-light: hsla(var(--hue-status-pedido-pendente), 55%, 52%, 0.2 );
+        --status-pedido-pendente-light: hsla(var(--hue-status-pedido-pendente), 55%, 52%, 0.1 );
         
         /*CANCELADO*/
         --status-pedido-cancelado: hsla(var(--hue-status-pedido-cancelado), 62%, 50%, 1);
-        --status-pedido-cancelado-light: hsla(var(--hue-status-pedido-cancelado), 62%, 50%, 0.2);
+        --status-pedido-cancelado-light: hsla(var(--hue-status-pedido-cancelado), 62%, 50%, 0.1);
         
         /*FINALIZADO*/
         --status-pedido-finalizado: hsla(var(--hue-status-pedido-finalizado), 44%, 44%, 1);
-        --status-pedido-finalizado-light: hsla(var(--hue-status-pedido-finalizado), 44%, 44%, 0.2);
+        --status-pedido-finalizado-light: hsla(var(--hue-status-pedido-finalizado), 44%, 44%, 0.1);
         
         
         --sidebar-width: 5.625rem;

@@ -56,6 +56,7 @@ export function NewOccurrenceModal({isOpen, onRequestClose, onLoadOccurrences, e
                     <Button
                         color="primary"
                         type="submit"
+                        style={{width: '100%'}}
                     >
                         Registrar nova ocorrência
                     </Button>

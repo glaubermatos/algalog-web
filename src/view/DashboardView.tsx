@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
+import { FiChevronRight } from 'react-icons/fi'
 
 import { useDeliveries } from '../hooks/useDeliveries';
 import { useCustomers } from '../hooks/useCustomers';
 
 import { Header } from '../components/Header';
 import { Icon } from '../components/Icon';
-
-import arrowRightImg from '../assets/images/arrow-right.svg'
 
 import { Container, Content } from '../styles/view/dashboard'
 
@@ -36,7 +35,7 @@ export function Dashboard() {
                 <h2 className="card-info-title ">Entregas</h2>
                 <strong>{deliveriesAmount}</strong>
               </div>
-              <img src={arrowRightImg} alt="arrow-right" />
+              <FiChevronRight size={32} strokeWidth={1.5}/>
             </Link>
           </div>
           <div className="card">
@@ -48,7 +47,7 @@ export function Dashboard() {
                 <h2 className="card-info-title ">Clientes</h2>
                 <strong>{customersAmount}</strong>
               </div>
-              <img src={arrowRightImg} alt="arrow-right" />
+              <FiChevronRight size={32} strokeWidth={1.5}/>
             </Link>
           </div>
         </Content>

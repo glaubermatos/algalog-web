@@ -55,13 +55,13 @@ export const Content = styled(PageContent)`
             color: var(--status-pedido-pendente)
         }
 
-        select.cancelado {
+        select.cancelada {
             background: var(--status-pedido-cancelado-light);
             border: 1.5px solid var(--status-pedido-cancelado);
             color: var(--status-pedido-cancelado)
         }
 
-        select.finalizado {
+        select.finalizada {
             background: var(--status-pedido-finalizado-light);
             border: 1.5px solid var(--status-pedido-finalizado);
             color: var(--status-pedido-finalizado)

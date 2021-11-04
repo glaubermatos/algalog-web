@@ -86,13 +86,13 @@ export const DeliveriesContainer = styled.div`
                     color: var(--status-pedido-pendente);
                 }
 
-                &.cancelado {
+                &.cancelada {
                     border: 1px solid var(--status-pedido-cancelado);
                     background: var(--status-pedido-cancelado-light);
                     color: var(--status-pedido-cancelado);
                 }
 
-                &.finalizado {
+                &.finalizada {
                     border: 1px solid var(--status-pedido-finalizado);
                     background: var(--status-pedido-finalizado-light);
                     color: var(--status-pedido-finalizado);

@@ -60,7 +60,10 @@ export function makeServer({ environment = 'test'}) {
               const id = request.params.id
               
               schema.db.entregas
-                .update(id, {status: 'FINALIZADO', dataFinalizacao: new Date()})
+                .update(id, {
+                  status: 'FINALIZADA', 
+                  dataFinalizacao: new Date()
+                })
         
               return new Response(204)
             })
@@ -69,7 +72,10 @@ export function makeServer({ environment = 'test'}) {
               const id = request.params.id
               
               schema.db.entregas
-                .update(id, {status: 'CANCELADO', dataFinalizacao: null})
+                .update(id, {
+                  status: 'CANCELADA', 
+                  dataFinalizacao: null
+                })
         
               return new Response(204)
             })
@@ -193,7 +199,7 @@ export function makeServer({ environment = 'test'}) {
                       bairro: 'Centro'
                   },
                   taxa: 25,
-                  status: 'FINALIZADO',
+                  status: 'FINALIZADA',
                   dataPedido: new Date(),
                   dataFinalizacao: new Date()
                 },
@@ -211,7 +217,7 @@ export function makeServer({ environment = 'test'}) {
                       bairro: 'Centro'
                   },
                   taxa: 10,
-                  status: 'CANCELADO',
+                  status: 'CANCELADA',
                   dataPedido: new Date(),
                   dataFinalizacao: null
                 }
