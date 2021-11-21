@@ -43,13 +43,13 @@ export function CreateNewDelivery() {
         event.preventDefault()
 
         try {
-            createDelivery(form)
+            await createDelivery(form)
             
             toast.success(`Entrega emitida com sucesso!`)
             history.push('/deliveries')
         } catch(error) {
             console.log(error)
-            alert(error)
+            toast.error('Não foi possível salvar os dados da entrega')
         }
     }
 

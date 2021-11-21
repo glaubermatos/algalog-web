@@ -35,17 +35,21 @@ export function CustomersProvider({ children }: CustomerProviderProps) {
         return response.data
     }
 
-    async function createCustomer(customerInput: CustomerInput) {
-        const response = await api
-            .post<CustomerInput, AxiosResponse<Customer>>('/clientes', customerInput)
+    function createCustomer(customerInput: CustomerInput) {
+        api.post<CustomerInput, AxiosResponse<Customer>>('/clientes', customerInput)
+            .then(response => {
+                const newCustomer = response.data
+                let customersUpdate = [...customers]
 
-        const newCustomer = response.data
-        let customersUpdate = [...customers]
+                customersUpdate.push(newCustomer)
 
-        customersUpdate.push(newCustomer)
-
-        setCustomer(newCustomer)
-        setCustomers(customersUpdate)
+                setCustomer(newCustomer)
+                setCustomers(customersUpdate)
+            })
+            .catch(error => {
+                console.log(error.response.data)
+                throw Error(error.response.data)
+            })
     }
 
     async function updateCustomer(customer: Customer) {

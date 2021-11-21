@@ -26,6 +26,9 @@ export function DeliveriesProvider({children}: DeliveriesProviderProps) {
     }, [])
 
     async function createDelivery(deliveryInput: DeliveryInput) {
+        // api.post<DeliveryInput, AxiosResponse<Delivery>>('/entregas', deliveryInput)
+        //     .then()
+        //     .catch()
         const response = await api
             .post<DeliveryInput, AxiosResponse<Delivery>>('/entregas', deliveryInput)
 

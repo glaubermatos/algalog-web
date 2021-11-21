@@ -72,11 +72,11 @@ export function RegistrationCustomer() {
             : onCreateNewCustomer(form)
     }
 
-    function onCreateNewCustomer(customer: InitialFormState) {
+    async function onCreateNewCustomer(customer: InitialFormState) {
         try {            
             const newCustomer = {...customer, telefone: handleFormatPhone()}
 
-            createCustomer(newCustomer)
+            await createCustomer(newCustomer)
 
             toast.success(`Cliente cadastrado com sucesso`)
             history.push('/customers')
@@ -86,11 +86,11 @@ export function RegistrationCustomer() {
         }
     }
 
-    function onUpdateCustomer(customer: Customer) {
+    async function onUpdateCustomer(customer: Customer) {
         try { 
             const newCustomer = {...customer, telefone: handleFormatPhone()}
 
-            updateCustomer(newCustomer)
+            await updateCustomer(newCustomer)
             
             toast.success('Dados do cliente atualizados')
             history.push('/customers')
