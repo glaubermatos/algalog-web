@@ -159,7 +159,7 @@ export function CreateNewDelivery() {
                             onChange={handleInputChange}
                         />
                         <Input
-                            label="Comoplemento"
+                            label="Complemento"
                             name="complemento"
                             value={form?.destinatario.complemento}
                             placeholder="Complemento"
